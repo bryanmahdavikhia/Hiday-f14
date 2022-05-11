@@ -10,7 +10,7 @@ def login(request):
     cursor = connection.cursor()
     cursor.execute("SET search_path TO public")
 
-    if not request.session.has_key('email'):
+    if not request.session.has_key('account'):
         cursor.execute("SET search_path TO hidayf14")
         if request.method == "POST":
             email = request.POST["email"]
@@ -27,14 +27,16 @@ def login(request):
 
                 if admin_check is not None:
                     role = "admin"
+                    account = admin_check
                     cursor.execute("SELECT email, password FROM admin WHERE email = %s AND password = %s", [email, password])
                 else:
                     role = "pengguna"
+                    account = pengguna_check
                     cursor.execute("SELECT email, password FROM pengguna WHERE email = %s AND password = %s", [email, password])
                 
                 if cursor.fetchone() is not None:
                     cursor.execute("SET search_path TO public")
-                    request.session['email'] = email
+                    request.session['account'] = account
                     request.session['role'] = role
                     return HttpResponseRedirect("/main")
                 
@@ -50,7 +52,7 @@ def login(request):
 def main(request):
     cursor = connection.cursor()
     cursor.execute("SET search_path TO public")
-    if request.session.has_key('email'):
+    if request.session.has_key('account'):
         role = request.session['role']
         return render(request, 'main.html', {'role': role})
     else:
@@ -58,7 +60,7 @@ def main(request):
 
 def logout(request):
     try:
-        del request.session['email']
+        del request.session['account']
         del request.session['role']
     except:
         pass
