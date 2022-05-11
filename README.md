@@ -4,4 +4,4 @@
 - Mohammad Bryan Mahdavikhia - 2006463124
 - Raissa Tito Safaraz - 2006483201
 
-Herokuapp : [hiday-f14](hiday-f14.herokuapp.com)
+Link Herokuapp : [hiday-f14](hiday-f14.herokuapp.com)
