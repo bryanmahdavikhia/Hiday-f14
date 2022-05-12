@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block meta %}
+<title>Tambah Produk</title>
+{% endblock meta %}
+
+{% block content %}
+<h2>Tambah Produk</h2>
+  
+<form method="post">
+  {% csrf_token %}
+  <p>Jenis Produk</p>
+  <input type="text" name="type" value="hasil panen" disabled>
+  <p>Nama</p>
+  <input type="text" name="name" value="dummy hasil panen" disabled>
+  <p>Harga Jual:</p>
+  <input type="number" name="price" required>
+  <p>Sifat Produk:</p>
+  <input type="text" name="characteristic" required>
+  <button type="submit">Tambahkan</button>
+</form>
+{% endblock content %}

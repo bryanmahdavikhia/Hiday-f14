@@ -57,6 +57,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'main',
+    'produk',
+    'paket_koin',
+    'aset',
 ]
 
 MIDDLEWARE = [
