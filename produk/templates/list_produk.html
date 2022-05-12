@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block meta %}
+<title>List Produk</title>
+{% endblock meta %}
+
+{% block content %}
+<table>
+    <tr>
+      <th>No</th>
+      <th>Jenis</th>
+      <th>Nama</th>
+      <th>Harga Jual</th>
+      <th>Sifat</th>
+    </tr>
+    {% for i in data %} 
+    <tr>
+      <td>{{ forloop.counter }}</td>
+      <td>{{ i.0 }}</td>
+      <td>{{ i.1 }}</td>
+      <td>{{ i.2 }}</td>
+      <td>{{ i.3 }}</td>
+      {% if role %}
+        <td><a href="/produk/update-product">Update</a></td>
+      {% endif %}
+    </tr>
+    {% endfor %}
+
+
+
+{% endblock content %}

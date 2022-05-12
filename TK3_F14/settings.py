@@ -56,6 +56,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'main',
+    'produk',
+    'paket_koin',
+    'aset',
 ]
 
 MIDDLEWARE = [
@@ -100,7 +103,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'hiday-f14',
         'USER': 'postgres',
-        'PASSWORD': 'Raichiyut123',
+        'PASSWORD': 'postgres',
         'HOST': 'localhost',
         'POST': '',
     }
