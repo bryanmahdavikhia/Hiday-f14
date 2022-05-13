@@ -4,7 +4,9 @@ from django.shortcuts import redirect, render
 
 
 def home(request):
-    return render(request, 'home.html')
+    if not request.session.has_key('account'):
+        return render(request, 'home.html')
+    return redirect("home:main")
 
 def login(request):
     cursor = connection.cursor()
@@ -53,7 +55,10 @@ def main(request):
     cursor = connection.cursor()
     cursor.execute("SET search_path TO public")
     if request.session.has_key('account'):
-        role = request.session['role']
+        if request.session['role'] == "admin":
+            role = "admin"
+        else:
+            role = None
         return render(request, 'main.html', {'role': role})
     else:
         return redirect("home:login")

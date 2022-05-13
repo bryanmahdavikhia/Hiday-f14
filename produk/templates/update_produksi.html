@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block meta %}
+<title>Update Produksi</title>
+{% endblock meta %}
+
+{% block content %}
+<h2>Update Produksi</h2>
+  
+<form method="post">
+  {% csrf_token %}
+  <p>Nama Produk Makanan</p>
+  <input type="text" name="food" value="dummy makanan" disabled>
+  <p>Alat Produksi</p>
+  <input type="text" name="tool" value="dummy alat" disabled>
+  <p>Durasi Produksi (dalam menit):</p>
+  <input type="number" name="duration" required>
+  <p>Sifat Produk:</p>
+  <input type="number" name="amount" required>
+  <table>
+    <tr>
+      <th>Bahan</th>
+      <th>Jumlah</th>
+    </tr>
+    <tr>
+      <td>dummy bahan</td>
+      <td>1</td>
+    </tr>
+</table>
+  <button type="submit">simpan</button>
+</form>
+{% endblock content %}

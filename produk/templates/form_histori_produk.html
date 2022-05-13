@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block meta %}
+<title>Produksi Produk makanan</title>
+{% endblock meta %}
+
+{% block content %}
+<h2>Tambah Produksi Produk makanan</h2>
+  
+<form method="post">
+  {% csrf_token %}
+  <a>ID Produk Makanan: </a>
+  <select name="product">
+      <option value = "dummy makanan">Dummy Makanan</option>
+  </select>
+  <br>
+  <a>jumlah: </a>
+  <input type="number" name="amount" id="amount" required>
+  <br>
+  <a>XP:</a>
+  <input type="number" name="xp" id="xp" disabled>
+  <br>
+  <button type="submit">Tambahkan</button>
+</form>
+
+<script>
+    $("#amount").keyup(function(){
+    $("#xp").val(this.value*5);
+});
+</script>
+{% endblock content %}
