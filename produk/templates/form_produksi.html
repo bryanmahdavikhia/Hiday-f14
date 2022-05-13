@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block meta %}
+<title>Tambah Produksi</title>
+{% endblock meta %}
+
+{% block content %}
+<h2>Tambah Produksi</h2>
+  
+<form method="post">
+  {% csrf_token %}
+  <p>Nama Produk Makanan</p>
+  <select name="food">
+      <option value = "dummy makanan">dummy makanan</option>
+  </select>
+  <p>Alat Produksi</p>
+  <select name="tool">
+      <option value = "dummy alat">dummy alat</option>
+  </select>
+  <p>Durasi Produksi</p>
+  <input type="number" name="duration" required>
+  <p>Jumlah Produk Yang Dihasilkan</p>
+  <input type="number" name="amount" required>
+  <p>Daftar Bahan yang Dibutuhkan</p>
+  <div class="field_wrapper">
+    <div>
+      <select name="bahan[]">
+        <option value = "dummy bahan">dummy bahan</option>
+      </select>
+      <a>jumlah: </a>
+      <input type="number" name="jumlah[]"/>
+      <a href="javascript:void(0);" class="add_button" title="Add field">tambah</a>
+    </div>
+  </div>
+  <button type="submit">Tambahkan</button>
+</form>
+
+  <script type="text/javascript">
+  $(document).ready(function(){
+      var addButton = $('.add_button'); //Add button selector
+      var wrapper = $('.field_wrapper'); //Input field wrapper
+      var fieldHTML = '<div><select name="bahan[]"><option value = "dummy bahan">dummy bahan</option></select><a>jumlah: </a><input type="number" name="jumlah[]" value=""/><a href="javascript:void(0);" class="remove_button">Hapus</a></div>'; //New input field html 
+      var x = 1; //Initial field counter is 1
+      
+      //Once add button is clicked
+      $(addButton).click(function(){
+            x++; //Increment field counter
+            $(wrapper).append(fieldHTML); //Add field html
+      });
+      
+      //Once remove button is clicked
+      $(wrapper).on('click', '.remove_button', function(e){
+          e.preventDefault();
+          $(this).parent('div').remove(); //Remove field html
+          x--; //Decrement field counter
+      });
+  });
+  </script>
+
+{% endblock content %}

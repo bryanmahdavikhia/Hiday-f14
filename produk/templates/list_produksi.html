@@ -9,10 +9,10 @@
 <table>
     <tr>
       <th>No</th>
-      <th>Jenis</th>
-      <th>Nama</th>
-      <th>Harga Jual</th>
-      <th>Sifat</th>
+      <th>Produk Makanan</th>
+      <th>Alat Produksi</th>
+      <th>Durasi Produksi</th>
+      <th>Jumlah Produk Hasil Produksi</th>
       {% if role %}
       <th>Action</th>
       {% endif %}
@@ -20,15 +20,19 @@
     {% for i in data %} 
     <tr>
       <td>{{ forloop.counter }}</td>
+      <td>{{ i.0 }}</td>
       <td>{{ i.1 }}</td>
       <td>{{ i.2 }}</td>
       <td>{{ i.3 }}</td>
+      <td>
+        <a href="/product/detail-production/{{forloop.counter}}">Detail<br></a>
       {% if role %}
-        <td><a href="/produk/update-product">Update</a></td>
+        <a href="/product/update-production">Update<br></a>
+        <a>delete</a>
       {% endif %}
+      </td>
     </tr>
     {% endfor %}
 </table>
-
 
 {% endblock content %}

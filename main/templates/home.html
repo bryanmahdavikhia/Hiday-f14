@@ -1,11 +1,15 @@
-{% extends 'base.html' %}
 {% load static %}
 
-{% block meta %}
-<title>Hello, world!</title>
-{% endblock meta %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome!</title>
+</head>
 
-{% block content %}
-  <h1>Hello, world!</h1>
-  <p><img src="{% static 'img/django-logo-negative.svg' %}"></p>
-{% endblock content %}
+<body>
+  <p><a>Register</a></p>
+  <p><a href="{% url 'home:login' %}">Login</a></p>
+</body>
+</html>
