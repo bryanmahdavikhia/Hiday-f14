@@ -6,7 +6,7 @@
 {% endblock meta %}
 
 {% block content %}
-<h2>Form Buat Aset Dekorasi</h2>
+<h2>Form Buat Aset Kandang</h2>
   
 <form method="post">
   {% csrf_token %}
@@ -17,8 +17,10 @@
   <input type="number" name="min_level" required>
   <p>Harga Beli:</p>
   <input type="number" name="harga" required>
-  <p>Harga Jual:</p>
-  <input type="number" name="harga_jual" required>
+  <p>Kapasitas Maks:</p>
+  <input type="number" name="kapasitas_maks" required>
+  <p>Jenis Hewan:</p>
+  <input type="text" name="jenis_hewan" required>
   <button type="submit">Tambahkan</button>
 </form>
 {% endblock content %}

@@ -6,7 +6,7 @@
 {% endblock meta %}
 
 {% block content %}
-<h2>Buat Aset Kandang mu!</h2>
+<h2>Form Buat Aset Kandang</h2>
   
 <form method="post">
   {% csrf_token %}
@@ -19,8 +19,17 @@
   <input type="number" name="harga" required>
   <p>Kapasitas Maks:</p>
   <input type="number" name="kapasitas_maks" required>
+  
   <p>Jenis Hewan:</p>
-  <input type="text" name="jenis_hewan" required>
+  
+  <select name="jenis_hewan" id="jenis_hewan">
+    <option selected disabled="true">--Jenis Hewan--</option>
+    {% for hewan in dropDownHewan %} 
+    <option>{{hewan.0}}</option>
+    {% endfor %}
+  </select>
+  
+
   <button type="submit">Tambahkan</button>
 </form>
 {% endblock content %}

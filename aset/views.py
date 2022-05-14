@@ -2,6 +2,7 @@
 from hashlib import new
 from django.db import connection
 from django.shortcuts import redirect, render
+from .models import dropDownHewan, dropDownTanaman
 
 
 def index(request):
@@ -16,7 +17,11 @@ def form_dekorasi(request):
     return render(request, 'form_dekorasi.html')
 
 def form_kandang(request):
-    return render(request, 'form_kandang.html')
+    cursor = connection.cursor()
+    cursor.execute("SET search_path TO hidayf14")
+    cursor.execute("SELECT nama FROM aset, hewan WHERE id=id_aset;")
+    data = cursor.fetchall()
+    return render(request, 'form_kandang.html',{"dropDownHewan":data})
 
 def form_hewan(request):
     return render(request, 'form_hewan.html')
@@ -25,7 +30,11 @@ def form_alat_produksi(request):
     return render(request, 'form_alat_produksi.html')
 
 def form_petak_sawah(request):
-    return render(request, 'form_petak_sawah.html')
+    cursor = connection.cursor()
+    cursor.execute("SET search_path TO hidayf14")
+    cursor.execute("SELECT nama FROM aset, bibit_tanaman WHERE id=id_aset;")
+    data = cursor.fetchall()
+    return render(request, 'form_petak_sawah.html',{"dropDownTanaman":data})
 
 def list_aset(request):
     return render(request, 'list_aset.html')
@@ -52,6 +61,7 @@ def list_bibit_tanaman(request):
 
 def list_kandang(request):
     cursor = connection.cursor()
+    
     cursor.execute("SET search_path TO public")
 
     cursor.execute("SET search_path TO hidayf14")
