@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block meta %}
+<title>List Kandang</title>
+{% endblock meta %}
+
+{% block content %}
+<table>
+    <tr>
+      <th>ID</th>
+      <th>Nama</th>
+      <th>Minimum Level</th>
+      <th>Harga Beli</th>
+      <th>Kapasitas Maksimal</th>
+      <th>Jenis Hewan</th>
+      {% if role %}
+      <th>Action</th>
+      {% endif %}
+    </tr>
+    {% for kandang in data %} 
+    <tr>
+      <td>{{ forloop.counter }}</td>
+      <td>{{ kandang.1 }}</td>
+      <td>{{ kandang.2 }}</td>
+      <td>{{ kandang.3 }}</td>
+      <td>{{ kandang.4 }}</td>
+      <td>{{ kandang.5 }}</td>
+      <td>{{ kandang.6 }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+
+{% endblock content %}

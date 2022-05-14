@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block meta %}
+<title>List Bibit Tanaman</title>
+{% endblock meta %}
+
+{% block content %}
+<table>
+    <tr>
+      <th>ID</th>
+      <th>Nama</th>
+      <th>Minimum Level</th>
+      <th>Harga Beli</th>
+      <th>Durasi Panen</th>
+      {% if role %}
+      <th>Action</th>
+      {% endif %}
+    </tr>
+    {% for bibit in data %} 
+    <tr>
+      <td>{{ forloop.counter }}</td>
+      <td>{{ bibit.1 }}</td>
+      <td>{{ bibit.2 }}</td>
+      <td>{{ bibit.3 }}</td>
+      <td>{{ bibit.4 }}</td>
+      <td>{{ bibit.5 }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+
+{% endblock content %}

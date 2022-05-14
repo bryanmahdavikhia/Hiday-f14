@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block meta %}
+<title>List Hewan</title>
+{% endblock meta %}
+
+{% block content %}
+<table>
+    <tr>
+      <th>ID</th>
+      <th>Nama</th>
+      <th>Minimum Level</th>
+      <th>Harga Beli</th>
+      <th>Durasi Produksi</th>
+      <th>ID Kandang</th>
+      {% if role %}
+      <th>Action</th>
+      {% endif %}
+    </tr>
+    {% for hewan in data %} 
+    <tr>
+      <td>{{ forloop.counter }}</td>
+      <td>{{ hewan.1 }}</td>
+      <td>{{ hewan.2 }}</td>
+      <td>{{ hewan.3 }}</td>
+      <td>{{ hewan.4 }}</td>
+      <td>{{ hewan.5 }}</td>
+      <td>{{ hewan.6 }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+
+{% endblock content %}
