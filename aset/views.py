@@ -47,12 +47,18 @@ def form_beli_aset(request):
 
 def list_transaksi_pembelian_aset(request):
     cursor = connection.cursor()
+    cursor.execute("SET search_path TO public") 
+    if request.session.has_key('account'):
+        if request.session['role'] == "admin":
+            role = "admin"
+        else:
+            role = None
     cursor.execute("SET search_path TO hidayf14") 
 
     list_aset = "SELECT email, waktu, nama, jumlah, jumlah*harga_beli AS total_harga FROM aset,transaksi_pembelian WHERE id=id_aset;"
     cursor.execute(list_aset)
     data = cursor.fetchall()
-    return render(request, 'list_transaksi_beli_aset.html',{"data":data})
+    return render(request, 'list_transaksi_beli_aset.html',{"data":data,'role': role})
 
 def list_aset(request):
     return render(request, 'list_aset.html')
