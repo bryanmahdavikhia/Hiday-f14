@@ -95,8 +95,46 @@ def transaksi_upgrade_lumbung(request):
             cursor.execute("SET search_path TO hidayf14")
             cursor.execute("SELECT * FROM lumbung l WHERE l.email = '" + request.session['account'][0] + "'")
             data = cursor.fetchall()
-            print(data)
             
     return render(request, 'transaksi_upgrade_lumbung.html', {'data':data, 'role': role})
  
+def histori_tanaman(request):
+    cursor = connection.cursor()
+    cursor.execute("SET search_path TO public")
+    
+    if request.session.has_key('account'):
+        role = request.session['role']
+        if request.session['role'] == "admin":
+            role = "admin"
+        else:
+            role = None
+            
+        if role == None:
+            cursor.execute("SET search_path TO hidayf14")
+            cursor.execute("SELECT id_aset FROM bibit_tanaman")
+            data = cursor.fetchall()
+            
+    return render(request, 'histori_tanaman.html', {'data':data, 'role': role})
 
+def list_histori_tanaman(request):
+    cursor = connection.cursor()
+    cursor.execute("SET search_path TO public")
+    
+    if request.session.has_key('account'):
+        role = request.session['role']
+        if request.session['role'] == "admin":
+            role = "admin"
+        else:
+            role = None
+    
+    cursor.execute("SET search_path TO hidayf14")
+    if role == "admin":
+        cursor.execute("select hp.email, hp.waktu_awal, hp.waktu_selesai, hp.jumlah, hp.xp, a.nama from histori_produksi hp JOIN histori_tanaman ht on hp.email = ht.email and hp.waktu_awal = ht.waktu_awal JOIN bibit_tanaman bt on ht.id_bibit_tanaman = bt.id_aset JOIN aset a on bt.id_aset = a.id")
+        data = cursor.fetchall()
+    else:
+        cursor.execute("select hp.email, hp.waktu_awal, hp.waktu_selesai, hp.jumlah, hp.xp, a.nama from histori_produksi hp JOIN histori_tanaman ht on hp.email = ht.email and hp.waktu_awal = ht.waktu_awal JOIN bibit_tanaman bt on ht.id_bibit_tanaman = bt.id_aset JOIN aset a on bt.id_aset = a.id WHERE hp.email = '" + request.session['account'][0] + "'")
+        data = cursor.fetchall()
+        
+    return render(request, 'list_histori_tanaman.html', {'data': data, 'role': role})
+
+    
