@@ -26,6 +26,9 @@
       <td>{{ alat.3 }}</td>
       <td>{{ alat.4 }}</td>
       <td>{{ alat.5 }}</td>
+      {% if role %}
+        <td><a href="/produk/update-product">Update</a></td>
+      {% endif %}
       
     </tr>
     {% endfor %}

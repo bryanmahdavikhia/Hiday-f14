@@ -25,8 +25,13 @@
       <td>{{ dekorasi.3 }}</td>
       <td>{{ dekorasi.4 }}</td>
       <td>{{ dekorasi.5 }}</td>
+      {% if role %}
+        <td><a href="/produk/update-product">Update</a></td>
+      {% endif %}
     </tr>
+    
     {% endfor %}
+
 </table>
 
 
