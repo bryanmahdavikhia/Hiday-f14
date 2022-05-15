@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block meta %}
+<title>Transaksi Upgrade Lumbung</title>
+{% endblock meta %}
+
+{% block content %}
+<h2>Transaksi Upgrade Lumbung</h2>
+  
+<form method="post">
+  {% csrf_token %}
+  <p disabled>ID Bibit Tanaman: {{data.0}}</p>
+  <select name="type">
+    <option value = "BT001">BT001</option>
+    <option value = "BT002">BT002</option>
+    <option value = "BT003">BT003</option>
+</select>
+  
+  <p>jumlahg:</p>
+  <input type="number" name="kapasitas" required>
+
+  <p>XP:</p>
+  <input type="number" name="harga" value=5 disabled>
+  <button type="submit">Upgrade</button>
+</form>
+{% endblock content %}

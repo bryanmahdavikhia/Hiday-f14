@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block meta %}
+<title>Transaksi Upgrade Lumbung</title>
+{% endblock meta %}
+
+{% block content %}
+<style>
+    table, th, td {
+      border:1px solid black;
+    }
+</style>
+<h2>Transaksi Upgrade Lumbung</h2>
+<table style="width:50%">
+    <tr>
+        <th>No</th>
+        <th>Email Pengguna</th>
+        <th>Waktu Upgrade</th>
+    </tr>
+    {% for i in data %} 
+    <tr>
+        <td>{{ forloop.counter }}</td>
+        <td>{{ i.0 }}</td>
+        <td>{{ i.1 }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+
+{% endblock content %}

@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block meta %}
+<title>List Koin</title>
+{% endblock meta %}
+
+{% block content %}
+<style>
+    table, th, td {
+      border:1px solid black;
+    }
+</style>
+<table style="width:50%">
+    <tr>
+        <th>No</th>
+        <th>Paket Koin</th>
+        <th>Harga</th>
+        <th>Action</th>
+    </tr>
+    {% for i in data %} 
+    <tr>
+        <td>{{ forloop.counter }}</td>
+        <td>{{ i.0 }}</td>
+        <td>{{ i.1 }}</td>
+        {% if role %}
+            <td><a href='{% url "paket_koin:update_paket" i.0 i.1 %}'>Update</a>
+            <a href="#">Delete</a></td>
+        {%else%}
+            <td><a href='{% url "paket_koin:beli_paket_koin" i.0 i.1 %}'>Beli</a></td>
+        {% endif %}
+    </tr>
+    {% endfor %}
+</table>
+
+
+{% endblock content %}

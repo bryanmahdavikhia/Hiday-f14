@@ -2,7 +2,10 @@
 from hashlib import new
 from django.db import connection
 from django.shortcuts import redirect, render
+<<<<<<< aset/views.py
+=======
 
+>>>>>>> aset/views.py
 
 
 def index(request):
