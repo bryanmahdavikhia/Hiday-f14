@@ -2,7 +2,7 @@
 from hashlib import new
 from django.db import connection
 from django.shortcuts import redirect, render
-from .models import dropDownHewan, dropDownTanaman
+# from .models import dropDownHewan, dropDownTanaman
 
 
 def index(request):
