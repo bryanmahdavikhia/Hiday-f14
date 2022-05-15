@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block meta %}
+<title>Update Paket</title>
+{% endblock meta %}
+
+{% block content %}
+<h2>Form Ubah Paket Koin</h2>
+  
+<form method="post">
+  {% csrf_token %}
+  <p disabled>Jumlah Koin</p>
+  <input type="text" name="value" value={{value}} disabled>
+  
+  <p>Harga:</p>
+  <input type="text" name="harga" value={{harga}} required>
+  <button type="submit">Simpan</button>
+</form>
+{% endblock content %}

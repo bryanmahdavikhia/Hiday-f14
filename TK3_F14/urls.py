@@ -20,5 +20,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('main.urls', namespace='home')),
     path('product/', include('produk.urls', namespace='product')),
-    path('aset/', include('aset.urls', namespace='aset'))
+    path('aset/', include('aset.urls', namespace='aset')),
+    path('koin/', include('paket_koin.urls', namespace='paket_koin'))
 ]
