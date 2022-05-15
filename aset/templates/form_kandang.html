@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block meta %}
-<title>Tambah Produk</title>
+<title>Tambah Kandang</title>
 {% endblock meta %}
 
 {% block content %}
@@ -11,6 +11,8 @@
 <form method="post">
   {% csrf_token %}
   
+  <p>ID</p>
+  <input type="text" value="KDXXX" disabled>
   <p>Nama</p>
   <input type="text" name="nama" required>
   <p>Minimum Level:</p>
