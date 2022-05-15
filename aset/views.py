@@ -177,4 +177,64 @@ def list_petak_sawah(request):
     cursor.execute(query)
     data = cursor.fetchall()
     return render(request, 'list_petak_sawah.html', {'data': data,'role': role})
+
+def update_dekorasi(request):
+    cursor = connection.cursor()
+    cursor.execute("SET search_path TO public")
+    if request.session.has_key('account'):
+        if request.session['role'] == "admin":
+            role = "admin"
+        else:
+            role = None
+    return render(request, 'update_dekorasi.html', {'role': role})
+
+def update_bibit(request):
+    cursor = connection.cursor()
+    cursor.execute("SET search_path TO public")
+    if request.session.has_key('account'):
+        if request.session['role'] == "admin":
+            role = "admin"
+        else:
+            role = None
+    return render(request, 'update_bibit_tanaman.html', {'role': role})
+
+def update_kandang(request):
+    cursor = connection.cursor()
+    cursor.execute("SET search_path TO public")
+    if request.session.has_key('account'):
+        if request.session['role'] == "admin":
+            role = "admin"
+        else:
+            role = None
+    return render(request, 'update_kadandang.html', {'role': role})
+
+def update_hewan(request):
+    cursor = connection.cursor()
+    cursor.execute("SET search_path TO public")
+    if request.session.has_key('account'):
+        if request.session['role'] == "admin":
+            role = "admin"
+        else:
+            role = None
+    return render(request, 'update_hewan.html', {'role': role})
+
+def update_alat(request):
+    cursor = connection.cursor()
+    cursor.execute("SET search_path TO public")
+    if request.session.has_key('account'):
+        if request.session['role'] == "admin":
+            role = "admin"
+        else:
+            role = None
+    return render(request, 'update_alat_produksi.html', {'role': role})
+
+def update_petak_sawah(request):
+    cursor = connection.cursor()
+    cursor.execute("SET search_path TO public")
+    if request.session.has_key('account'):
+        if request.session['role'] == "admin":
+            role = "admin"
+        else:
+            role = None
+    return render(request, 'update_petak_sawah.html', {'role': role})
     

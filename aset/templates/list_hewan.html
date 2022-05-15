@@ -6,6 +6,8 @@
 {% endblock meta %}
 
 {% block content %}
+
+<h1>List Hewan</h1>
 <table>
     <tr>
       <th>ID</th>
@@ -28,7 +30,7 @@
       <td>{{ hewan.5 }}</td>
       <td>{{ hewan.6 }}</td>
       {% if role %}
-        <td><a href="/produk/update-product">Update</a></td>
+        <td><a href="update-hewan/">Update</a></td>
       {% endif %}
     </tr>
     {% endfor %}

@@ -6,6 +6,8 @@
 {% endblock meta %}
 
 {% block content %}
+
+<h1>List Bibit Tanaman</h1>
 <table>
     <tr>
       <th>ID</th>
@@ -26,7 +28,7 @@
       <td>{{ bibit.4 }}</td>
       <td>{{ bibit.5 }}</td>
       {% if role %}
-        <td><a href="/produk/update-product">Update</a></td>
+        <td><a href="update-bibit/">Update</a></td>
       {% endif %}
     </tr>
     {% endfor %}
