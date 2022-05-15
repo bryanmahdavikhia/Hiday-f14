@@ -2,17 +2,18 @@
 {% load static %}
 
 {% block meta %}
-<title>Tambah Produk</title>
+<title>Update Petak Sawah</title>
 {% endblock meta %}
 
 {% block content %}
-<h2>Form Buat Aset Petak Sawah</h2>
+<h2>Form Update Petak Sawah</h2>
   
 <form method="post">
   {% csrf_token %}
-  
+  <p>ID</p>
+  <input type="text" value="PSXXX" disabled>
   <p>Nama</p>
-  <input type="text" name="nama" required>
+  <input type="text" name="nama" disabled>
   <p>Minimum Level:</p>
   <input type="number" name="min_level" required>
   <p>Harga Beli:</p>
@@ -21,6 +22,6 @@
   <input type="number" name="kapasitas_maks" required>
   <p>Jenis Tanaman:</p>
   <input type="text" name="jenis_tanaman" required>
-  <button type="submit">Tambahkan</button>
+  <button type="submit">Simpan</button>
 </form>
 {% endblock content %}

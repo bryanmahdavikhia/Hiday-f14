@@ -6,6 +6,8 @@
 {% endblock meta %}
 
 {% block content %}
+
+<h1>List Kandang</h1>
 <table>
     <tr>
       <th>ID</th>
@@ -27,6 +29,9 @@
       <td>{{ kandang.4 }}</td>
       <td>{{ kandang.5 }}</td>
       <td>{{ kandang.6 }}</td>
+      {% if role %}
+        <td><a href="update-kandang/">Update</a></td>
+      {% endif %}
     </tr>
     {% endfor %}
 </table>

@@ -2,23 +2,24 @@
 {% load static %}
 
 {% block meta %}
-<title>Tambah Produk</title>
+<title>Update Bibit</title>
 {% endblock meta %}
 
 {% block content %}
-<h2>Form Buat Aset Bibit Tanaman mu!</h2>
+<h2>Form Update Bibit Tanaman</h2>
   
 <form method="post">
   {% csrf_token %}
-  
+  <p>ID</p>
+  <input type="text" value="BTXXX" disabled>
   <p>Nama</p>
-  <input type="text" name="nama" required>
+  <input type="text" value="Nama" disabled>
   <p>Minimum Level:</p>
   <input type="number" name="min_level" required>
   <p>Harga Beli:</p>
   <input type="number" name="harga" required>
   <p>Durasi Panen:</p>
   <input type="text" name="durasi_panen" required>
-  <button type="submit">Tambahkan</button>
+  <button type="submit">Simpan</button>
 </form>
 {% endblock content %}

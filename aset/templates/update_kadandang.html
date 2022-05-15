@@ -2,17 +2,19 @@
 {% load static %}
 
 {% block meta %}
-<title>Tambah Produk</title>
+<title>Update Kandang</title>
 {% endblock meta %}
 
 {% block content %}
-<h2>Form Buat Aset Kandang</h2>
+<h2>Form Update Kandang</h2>
   
 <form method="post">
   {% csrf_token %}
   
+  <p>ID</p>
+  <input type="text" value="KDXXX" disabled>
   <p>Nama</p>
-  <input type="text" name="nama" required>
+  <input type="text" name="nama" disabled>
   <p>Minimum Level:</p>
   <input type="number" name="min_level" required>
   <p>Harga Beli:</p>
@@ -20,7 +22,7 @@
   <p>Kapasitas Maks:</p>
   <input type="number" name="kapasitas_maks" required>
   <p>Jenis Hewan:</p>
-  <input type="text" name="jenis_hewan" required>
-  <button type="submit">Tambahkan</button>
+  <input type="text" name="jenis_hewan" disabled>
+  <button type="submit">Simpan</button>
 </form>
 {% endblock content %}
