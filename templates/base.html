@@ -66,10 +66,10 @@
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="dropdown07" data-bs-toggle="dropdown" aria-expanded="false">Koleksi Aset</a>
             <ul class="dropdown-menu" aria-labelledby="dropdown07">
-              <li><a class="dropdown-item" href="#">List Koleksi Aset</a></li>
-              {% if request.session.role == "pengguna" %}
+              <li><a class="dropdown-item" href="/aset/list-koleksi-aset">List Koleksi Aset</a></li>
+              <!--{% if request.session.role == "pengguna" %}-->
               <li><a class="dropdown-item" href="#">Buat Transaksi Pembelian Aset</a></li>
-              {% endif %}
+              <!--{% endif %}-->
               <li><a class="dropdown-item" href="#">List Transaksi Pembelian Aset</a></li>
             </ul>
           </li>

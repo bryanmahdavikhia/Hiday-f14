@@ -1,0 +1,25 @@
+{% block meta %}
+<title>Tambah Produk</title>
+{% endblock meta %}
+
+{% block content %}
+<h2>Form Beli Aset</h2>
+  
+<form method="post">
+  {% csrf_token %}
+  
+  <p>Detail Aset:</p>
+  
+  <select name="jenis_hewan" id="jenis_hewan">
+    <option selected disabled="true">--Detail Aset--</option>
+    {% for aset in dropDownAset %} 
+    <option>{{aset}}</option>
+    {% endfor %}
+  </select>
+  <p>Jumlah:</p>
+  <input type="number" name="kapasitas_maks" required>
+  
+
+  <button type="submit">Beli</button>
+</form>
+{% endblock content %}

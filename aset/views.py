@@ -36,8 +36,29 @@ def form_petak_sawah(request):
     data = cursor.fetchall()
     return render(request, 'form_petak_sawah.html',{"dropDownTanaman":data})
 
+def form_beli_aset(request):
+    cursor = connection.cursor()
+    cursor.execute("SET search_path TO hidayf14") #harus dicek lagi
+
+    list_aset = "SELECT nama, harga_beli FROM aset;"
+    cursor.execute(list_aset)
+    data = cursor.fetchall()
+    return render(request, 'form_beli_aset.html',{"dropDownAset":data})
+
+def list_transaksi_pembelian_aset(request):
+    cursor = connection.cursor()
+    cursor.execute("SET search_path TO hidayf14") 
+
+    list_aset = "SELECT email, waktu, nama, jumlah, jumlah*harga_beli AS total_harga FROM aset,transaksi_pembelian WHERE id=id_aset;"
+    cursor.execute(list_aset)
+    data = cursor.fetchall()
+    return render(request, 'list_transaksi_beli_aset.html',{"data":data})
+
 def list_aset(request):
     return render(request, 'list_aset.html')
+
+def list_koleksi_aset(request):
+    return render(request, 'list_koleksi_aset.html')
 
 def list_dekorasi(request):
     cursor = connection.cursor()
