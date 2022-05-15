@@ -2,7 +2,7 @@
 from hashlib import new
 from django.db import connection
 from django.shortcuts import redirect, render
-from .models import dropDownHewan, dropDownTanaman
+
 
 
 def index(request):
@@ -19,9 +19,9 @@ def form_dekorasi(request):
 def form_kandang(request):
     cursor = connection.cursor()
     cursor.execute("SET search_path TO hidayf14")
-    cursor.execute("SELECT nama FROM aset, hewan WHERE id=id_aset;")
+    cursor.execute("SELECT nama FROM aset, bibit_tanaman WHERE id=id_aset;")
     data = cursor.fetchall()
-    return render(request, 'form_kandang.html',{"dropDownHewan":data})
+    return render(request, 'form_kandang.html',{"data":data})
 
 def form_hewan(request):
     return render(request, 'form_hewan.html')
@@ -34,7 +34,7 @@ def form_petak_sawah(request):
     cursor.execute("SET search_path TO hidayf14")
     cursor.execute("SELECT nama FROM aset, bibit_tanaman WHERE id=id_aset;")
     data = cursor.fetchall()
-    return render(request, 'form_petak_sawah.html',{"dropDownTanaman":data})
+    return render(request, 'form_petak_sawah.html',{"data":data})
 
 def form_beli_aset(request):
     cursor = connection.cursor()
@@ -58,13 +58,27 @@ def list_aset(request):
     return render(request, 'list_aset.html')
 
 def list_koleksi_aset(request):
+    
     cursor = connection.cursor()
-    cursor.execute("SET search_path TO hidayf14") 
+    cursor.execute("SET search_path TO public")
 
-    list_aset = "SELECT id_koleksi_aset, nama, minimum_level, harga_beli, jumlah FROM aset, koleksi_aset_memiliki_aset WHERE id=id_aset;"
-    cursor.execute(list_aset)
-    data = cursor.fetchall()
-    return render(request, 'list_koleksi_aset.html',{"data":data})
+    if request.session.has_key('account'):
+        role = request.session['role']
+        if role == "admin":
+            cursor.execute("SET search_path TO hidayf14") 
+
+            list_aset = "SELECT id_koleksi_aset, nama, minimum_level, harga_beli, jumlah FROM aset, koleksi_aset_memiliki_aset WHERE id=id_aset;"
+            cursor.execute(list_aset)
+            data = cursor.fetchall()
+            return render(request, 'list_koleksi_aset.html',{"data":data})
+        elif role == "pengguna":
+            cursor.execute("SET search_path TO hidayf14") 
+
+            list_aset = "SELECT nama, minimum_level, harga_beli, jumlah FROM aset, koleksi_aset_memiliki_aset WHERE id=id_aset;"
+            cursor.execute(list_aset)
+            data = cursor.fetchall()
+            return render(request, 'list_koleksi_aset.html',{"data":data})
+        
 
 def list_dekorasi(request):
     cursor = connection.cursor()

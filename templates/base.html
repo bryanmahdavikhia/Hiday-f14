@@ -50,7 +50,7 @@
             <a class="nav-link dropdown-toggle" href="#" id="dropdown07" data-bs-toggle="dropdown" aria-expanded="false">Aset</a>
             <ul class="dropdown-menu" aria-labelledby="dropdown07">
               {% if request.session.role == "admin" %}
-              <li><a class="dropdown-item" href="#">Buat Aset</a></li>
+              <li><a class="dropdown-item" href="/aset/">Buat Aset</a></li>
               {% endif %}
               <li><a class="dropdown-item" href="/aset/list-aset">List Aset</a></li>
               {% if request.session.role == "admin" %}
@@ -67,10 +67,10 @@
             <a class="nav-link dropdown-toggle" href="#" id="dropdown07" data-bs-toggle="dropdown" aria-expanded="false">Koleksi Aset</a>
             <ul class="dropdown-menu" aria-labelledby="dropdown07">
               <li><a class="dropdown-item" href="/aset/list-koleksi-aset">List Koleksi Aset</a></li>
-              <!--{% if request.session.role == "pengguna" %}-->
+              {% if request.session.role == "pengguna" %}
               <li><a class="dropdown-item" href="#">Buat Transaksi Pembelian Aset</a></li>
-              <!--{% endif %}-->
-              <li><a class="dropdown-item" href="#">List Transaksi Pembelian Aset</a></li>
+              {% endif %}
+              <li><a class="dropdown-item" href="/aset/list-transaksi-beli-aset">List Transaksi Pembelian Aset</a></li>
             </ul>
           </li>
           <li class="nav-item dropdown">
