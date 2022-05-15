@@ -68,8 +68,13 @@ def list_transaksi(request):
             role = None
     
     cursor.execute("SET search_path TO hidayf14")
-    cursor.execute("SELECT * FROM transaksi_pembelian_koin")
-    data = cursor.fetchall()
+    if role == "admin":
+        cursor.execute("SELECT * FROM transaksi_pembelian_koin")
+        data = cursor.fetchall()
+    else:
+        cursor.execute("SELECT * FROM transaksi_pembelian_koin WHERE email = '" + request.session['account'][0] + "'")
+        data = cursor.fetchall()
+        
     return render(request, 'list_transaksi.html', {'data': data, 'role': role})
 
 def beli_paket_koin(request, value, harga):
@@ -96,4 +101,4 @@ def beli_paket_koin(request, value, harga):
             return redirect("paket_koin:list_transaksi")
     else:
         return redirect("home:login")
-    
+
