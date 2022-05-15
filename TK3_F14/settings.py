@@ -103,11 +103,11 @@ WSGI_APPLICATION = 'TK3_F14.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'hiday-f14',
-        'USER': 'postgres',
-        'PASSWORD': 'postgres',
-        'HOST': 'localhost',
-        'POST': '',
+        'NAME': 'd6l45n3fvti5mj',
+        'USER': 'oivklbntqkvqwm',
+        'PASSWORD': '2e87c07a6a7ef8fc043666312a7e84e23fd609e6a6d2bfc7af16f626da62409c',
+        'HOST': 'ec2-54-164-40-66.compute-1.amazonaws.com',
+        'PORT': '5432',
     }
 }
 
