@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block meta %}
+<title>Transaksi Upgrade Lumbung</title>
+{% endblock meta %}
+
+{% block content %}
+<h2>Transaksi Upgrade Lumbung</h2>
+  
+<form method="post">
+  {% csrf_token %}
+  <p disabled>Level Lumbung:</p>
+  <input type="number" name="level" value={{data.0.1}} disabled>
+  
+  <p>Kapasitas Lumbung:</p>
+  <input type="number" name="kapasitas" value={{data.0.2}} disabled>
+
+  <p>Biaya:</p>
+  <input type="number" name="harga" value=200 disabled>
+  <button type="submit">Upgrade</button>
+</form>
+{% endblock content %}

@@ -101,4 +101,3 @@ def beli_paket_koin(request, value, harga):
             return redirect("paket_koin:list_transaksi")
     else:
         return redirect("home:login")
-

@@ -27,7 +27,7 @@
             <td><a href='{% url "paket_koin:update_paket" i.0 i.1 %}'>Update</a>
             <a href="#">Delete</a></td>
         {%else%}
-            <td><a href="{% url "paket_koin:beli_paket_koin" i.0 i.1 %}">Beli</a></td>
+            <td><a href='{% url "paket_koin:beli_paket_koin" i.0 i.1 %}'>Beli</a></td>
         {% endif %}
     </tr>
     {% endfor %}
