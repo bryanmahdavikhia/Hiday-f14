@@ -2,25 +2,34 @@
 {% load static %}
 
 {% block meta %}
-<title>Lihat Aset Hi-Day</title>
+<title>List Transaksi Beli Aset</title>
 {% endblock meta %}
 
 {% block content %}
 
+<h1>List Koleksi Aset</h1>
+<table>
+    <tr>
+      <th>Email</th>
+      <th>Nama Aset</th>
+      <th>Minimum Level</th>
+      <th>Harga Beli</th>
+      <th>Jumlah</th>
+      {% if role %}
+      <th>Action</th>
+      {% endif %}
+    </tr>
+    {% for transaksi in data %} 
+    <tr>
+      <td>{{ forloop.counter }}</td>
+      <td>{{ transaksi.0 }}</td>
+      <td>{{ transaksi.1 }}</td>
+      <td>{{ transaksi.2 }}</td>
+      <td>{{ transaksi.3 }}</td>
+      <td>{{ transaksi.4 }}</td>
+    </tr>
+    {% endfor %}
+</table>
 
-<div class="center">
-    <div class="container text-center">
-        <h1>List Koleksi Aset Hi-Day!</h1>
-        <div class="btn-group-vertical w-75">
-            <button type="button" class="btn btn-primary btn-lg btn-block" style="margin-bottom: 10px ; border-radius: 10px !important"> Dekorasi </button>
-            
-            <button type="button" class="btn btn-primary btn-lg btn-block" style="margin-bottom: 10px ; border-radius: 10px !important"> Bibit_Tanaman </button>
-            
-            <button type="button" class="btn btn-primary btn-lg btn-block" style="margin-bottom: 10px ; border-radius: 10px !important"> Kandang </button>
-            <button type="button" class="btn btn-primary btn-lg btn-block" style="margin-bottom: 10px ; border-radius: 10px !important"> Hewan </button>
-            <button type="button" class="btn btn-primary btn-lg btn-block" style="margin-bottom: 10px ; border-radius: 10px !important"> Alat_Produksi </button>
-            <button type="button" class="btn btn-primary btn-lg btn-block" style="margin-bottom: 10px ; border-radius: 10px !important"> Petak_Sawah </button>
-        </div>
-    </div>
-</div>
+
 {% endblock content %}

@@ -58,7 +58,13 @@ def list_aset(request):
     return render(request, 'list_aset.html')
 
 def list_koleksi_aset(request):
-    return render(request, 'list_koleksi_aset.html')
+    cursor = connection.cursor()
+    cursor.execute("SET search_path TO hidayf14") 
+
+    list_aset = "SELECT id_koleksi_aset, nama, minimum_level, harga_beli, jumlah FROM aset, koleksi_aset_memiliki_aset WHERE id=id_aset;"
+    cursor.execute(list_aset)
+    data = cursor.fetchall()
+    return render(request, 'list_koleksi_aset.html',{"data":data})
 
 def list_dekorasi(request):
     cursor = connection.cursor()
