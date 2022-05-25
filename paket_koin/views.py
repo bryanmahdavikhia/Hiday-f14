@@ -15,8 +15,8 @@ def create_paket(request):
                 value = request.POST["value"]
                 price = request.POST["price"]
                 
-                # cursor.execute("SET search_path TO hidayf14")
-                # cursor.execute("INSERT INTO paket_koin VALUES (%s, %s)", [value, price])
+                cursor.execute("SET search_path TO hidayf14")
+                cursor.execute("INSERT INTO paket_koin VALUES (%s, %s)", [value, price])
                 return redirect("paket_koin:list_paket")
             else:
                 return render(request, "create_paket.html", {})

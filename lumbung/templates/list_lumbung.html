@@ -12,9 +12,9 @@
       width:50;
     }
 </style>
-{% if role == 'pengguna' %}
-    <h3>Level: -</h3>
-    <h3>Kapasitas: -</h3>
+{% if role == none %}
+    <h3>Level: {{pengguna.0.1}}</h3>
+    <h3>Kapasitas: {{pengguna.0.3}}/{{pengguna.0.2}}</h3>
 
     <div class="table-wraper">
         <table class ="table">
