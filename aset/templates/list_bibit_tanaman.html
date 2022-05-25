@@ -28,7 +28,7 @@
       <td>{{ bibit.4 }}</td>
       <td>{{ bibit.5 }}</td>
       {% if role %}
-        <td><a href="update-bibit/">Update</a></td>
+        <td><a href='{% url "aset:update-bibit" bibit.1 %}'>Update</a></td>
       {% endif %}
     </tr>
     {% endfor %}

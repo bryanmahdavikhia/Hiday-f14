@@ -2,39 +2,36 @@
 {% load static %}
 
 {% block meta %}
-<title>List Kandang</title>
+<title>List Koleksi Dekorasi</title>
 {% endblock meta %}
 
 {% block content %}
 
-<h1>List Petak Sawah</h1>
+<h1>List Koleksi Dekorasi</h1>
 <table>
     <tr>
-      <th>ID</th>
-      <th>Nama</th>
+      {% if role %}
+      <th>Email</th>
+      {% endif %}
+      <th>Nama Aset</th>
       <th>Minimum Level</th>
       <th>Harga Beli</th>
-      <th>Jenis Tanaman</th>
-      
+      <th>Jumlah</th>
       {% if role %}
       <th>Action</th>
       {% endif %}
     </tr>
-    {% for sawah in data %} 
+    {% for transaksi in data %} 
     <tr>
       <td>{{ forloop.counter }}</td>
-      <td>{{ sawah.1 }}</td>
-      <td>{{ sawah.2 }}</td>
-      <td>{{ sawah.3 }}</td>
-      <td>{{ sawah.4 }}</td>
-      <td>{{ sawah.5 }}</td>
       {% if role %}
-        <td><a href='{% url "aset:update-sawah" sawah.1%}'>Update</a></td>
+      <td>{{ transaksi.0 }}</td>
       {% endif %}
-      
+      <td>{{ transaksi.1 }}</td>
+      <td>{{ transaksi.2 }}</td>
+      <td>{{ transaksi.3 }}</td>
+      <td>{{ transaksi.4 }}</td>
     </tr>
     {% endfor %}
 </table>
-
-
 {% endblock content %}

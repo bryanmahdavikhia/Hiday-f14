@@ -30,7 +30,7 @@
       <td>{{ hewan.5 }}</td>
       <td>{{ hewan.6 }}</td>
       {% if role %}
-        <td><a href="update-hewan/">Update</a></td>
+        <td><a href='{% url "aset:update-hewan" hewan.1 %}'>Update</a></td>
       {% endif %}
     </tr>
     {% endfor %}

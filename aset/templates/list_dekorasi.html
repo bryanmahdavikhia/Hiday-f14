@@ -27,7 +27,7 @@
       <td>{{ dekorasi.4 }}</td>
       <td>{{ dekorasi.5 }}</td>
       {% if role %}
-        <td><a href="update-dekorasi/">Update</a></td>
+        <td><a href='{% url "aset:update-dekorasi" dekorasi.1 %}'>Update</a></td>
       {% endif %}
     </tr>
     

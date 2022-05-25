@@ -30,7 +30,7 @@
       <td>{{ kandang.5 }}</td>
       <td>{{ kandang.6 }}</td>
       {% if role %}
-        <td><a href="update-kandang/">Update</a></td>
+        <td><a href='{% url "aset:update-kandang" kandang.1%}'>Update</a></td>
       {% endif %}
     </tr>
     {% endfor %}
