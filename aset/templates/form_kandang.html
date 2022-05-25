@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block meta %}
-<title>Tambah Produk</title>
+<title>Tambah Kandang</title>
 {% endblock meta %}
 
 {% block content %}
@@ -11,6 +11,8 @@
 <form method="post">
   {% csrf_token %}
   
+  <p>ID</p>
+  <input type="text" value="KDXXX" disabled>
   <p>Nama</p>
   <input type="text" name="nama" required>
   <p>Minimum Level:</p>
@@ -21,14 +23,7 @@
   <input type="number" name="kapasitas_maks" required>
   
   <p>Jenis Hewan:</p>
-  
-  <select name="jenis_hewan" id="jenis_hewan">
-    <option selected disabled="true">--Jenis Hewan--</option>
-    {% for hewan in dropDownHewan %} 
-    <option>{{hewan.0}}</option>
-    {% endfor %}
-  </select>
-  
+  <input type="number" name="jenis_hewan" required>
 
   <button type="submit">Tambahkan</button>
 </form>

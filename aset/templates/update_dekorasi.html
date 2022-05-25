@@ -2,23 +2,24 @@
 {% load static %}
 
 {% block meta %}
-<title>Tambah Produk</title>
+<title>Update Dekorasi</title>
 {% endblock meta %}
 
 {% block content %}
-<h2>Form Buat Aset Dekorasi</h2>
+<h2>Form Update Dekorasi</h2>
   
 <form method="post">
   {% csrf_token %}
-  
-  <p>Nama</p>
-  <input type="text" name="nama" required>
+  <p>ID:</p>
+  <input type="text" name="type" value="DKXXX" disabled>
+  <p>Nama:</p>
+  <input type="text" name="name" value="Nama" disabled>
   <p>Minimum Level:</p>
-  <input type="number" name="min_level" required>
+  <input type="number" name="min level" required>
   <p>Harga Beli:</p>
-  <input type="number" name="harga" required>
+  <input type="text" name="harga beli" required>
   <p>Harga Jual:</p>
-  <input type="number" name="harga_jual" required>
-  <button type="submit">Tambahkan</button>
+  <input type="text" name="harga jual" required>
+  <button type="submit">Simpan</button>
 </form>
 {% endblock content %}

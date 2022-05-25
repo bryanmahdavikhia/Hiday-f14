@@ -2,10 +2,12 @@
 {% load static %}
 
 {% block meta %}
-<title>List Kandang</title>
+<title>List Alat Produksi</title>
 {% endblock meta %}
 
 {% block content %}
+
+<h1>List Alat Produksi</h1>
 <table>
     <tr>
       <th>ID</th>
@@ -26,6 +28,9 @@
       <td>{{ alat.3 }}</td>
       <td>{{ alat.4 }}</td>
       <td>{{ alat.5 }}</td>
+      {% if role %}
+        <td><a href="update-alat/">Update</a></td>
+      {% endif %}
       
     </tr>
     {% endfor %}

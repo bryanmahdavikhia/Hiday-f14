@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block meta %}
-<title>Tambah Produk</title>
+<title>Tambah Sawah</title>
 {% endblock meta %}
 
 {% block content %}
@@ -11,6 +11,8 @@
 <form method="post">
   {% csrf_token %}
   
+  <p>ID</p>
+  <input type="text" value="PSXXX" disabled>
   <p>Nama</p>
   <input type="text" name="nama" required>
   <p>Minimum Level:</p>
@@ -24,7 +26,7 @@
   
   <select name="jenis_tanaman" id="jenis_tanaman">
     <option selected disabled="true">--Jenis Tanaman--</option>
-    {% for tanaman in dropDownTanaman %} 
+    {% for tanaman in data %} 
     <option>{{tanaman.0}}</option>
     {% endfor %}
   </select>

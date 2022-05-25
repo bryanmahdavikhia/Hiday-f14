@@ -6,6 +6,8 @@
 {% endblock meta %}
 
 {% block content %}
+
+<h1>List Petak Sawah</h1>
 <table>
     <tr>
       <th>ID</th>
@@ -26,6 +28,9 @@
       <td>{{ sawah.3 }}</td>
       <td>{{ sawah.4 }}</td>
       <td>{{ sawah.5 }}</td>
+      {% if role %}
+        <td><a href="update-sawah/">Update</a></td>
+      {% endif %}
       
     </tr>
     {% endfor %}
