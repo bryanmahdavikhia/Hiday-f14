@@ -23,14 +23,14 @@
     {% for kandang in data %} 
     <tr>
       <td>{{ forloop.counter }}</td>
+      <td>{{ kandang.0 }}</td>
       <td>{{ kandang.1 }}</td>
       <td>{{ kandang.2 }}</td>
       <td>{{ kandang.3 }}</td>
       <td>{{ kandang.4 }}</td>
       <td>{{ kandang.5 }}</td>
-      <td>{{ kandang.6 }}</td>
       {% if role %}
-        <td><a href='{% url "aset:update-kandang" kandang.1%}'>Update</a></td>
+        <td><a href='{% url "aset:update-kandang" kandang.0 kandang.1 kandang.2 kandang.3 kandang.4 kandang.5%}'>Update</a></td>
       {% endif %}
     </tr>
     {% endfor %}

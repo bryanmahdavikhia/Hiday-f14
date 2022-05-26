@@ -28,21 +28,21 @@ urlpatterns = [
     path('form-petak-sawah/', views.form_petak_sawah, name='form-petak-sawah'),
 
     path('list-aset/list-dekorasi/', views.list_dekorasi, name='list-dekorasi'),
-    path('list-aset/list-dekorasi/update-dekorasi/<str:nama>/', views.update_dekorasi, name='update-dekorasi'),
+    path('list-aset/list-dekorasi/update-dekorasi/<str:id>/<str:nama>/<int:min_level>/<int:harga_beli>/<int:harga_jual>/', views.update_dekorasi, name='update-dekorasi'),
 
     path('list-aset/list-bibit-tanaman/', views.list_bibit_tanaman, name='list-bibit-tanaman'),
-    path('list-aset/list-bibit-tanaman/update-bibit/<str:nama>/', views.update_bibit, name='update-bibit'),
+    path('list-aset/list-bibit-tanaman/update-bibit/<str:id>/<str:nama>/<int:min_level>/<int:harga_beli>/', views.update_bibit, name='update-bibit'),
 
     path('list-aset/list-kandang/', views.list_kandang, name='list-kandang'),
-    path('list-aset/list-kandang/update-kandang/<str:nama>/', views.update_kandang, name='update-kandang'),
+    path('list-aset/list-kandang/update-kandang/<str:id>/<str:nama>/<int:min_level>/<int:harga_beli>/<int:kapasitas_maks>/<str:jenis_hewan>/', views.update_kandang, name='update-kandang'),
 
     path('list-aset/list-hewan/', views.list_hewan, name='list-hewan'),
-    path('list-aset/list-hewan/update-hewan/<str:nama>/', views.update_hewan, name='update-hewan'),
+    path('list-aset/list-hewan/update-hewan/<str:id>/<str:nama>/<int:min_level>/<int:harga_beli>/<str:id_kandang>/', views.update_hewan, name='update-hewan'),
 
     path('list-aset/list-alat-produksi/', views.list_alat_produksi, name='list-alat'),
-    path('list-aset/list-alat-produksi/update-alat/<str:nama>/', views.update_alat, name='update-alat'),
+    path('list-aset/list-alat-produksi/update-alat/<str:id>/<str:nama>/<int:min_level>/<int:harga_beli>/<int:kapasitas_maks>/', views.update_alat, name='update-alat'),
 
     path('list-aset/list-petak-sawah/', views.list_petak_sawah, name='list-petak-sawah'),
-    path('list-aset/list-petak-sawah/update-sawah/<str:nama>/', views.update_petak_sawah, name='update-sawah')
+    path('list-aset/list-petak-sawah/update-sawah/<str:id>/<str:nama>/<int:min_level>/<int:harga_beli>/', views.update_petak_sawah, name='update-sawah')
     
 ]

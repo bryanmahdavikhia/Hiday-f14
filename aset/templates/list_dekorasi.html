@@ -21,13 +21,14 @@
     {% for dekorasi in data %} 
     <tr>
       <td>{{ forloop.counter }}</td>
+      <td>{{ dekorasi.0 }}</td>
       <td>{{ dekorasi.1 }}</td>
       <td>{{ dekorasi.2 }}</td>
       <td>{{ dekorasi.3 }}</td>
       <td>{{ dekorasi.4 }}</td>
       <td>{{ dekorasi.5 }}</td>
       {% if role %}
-        <td><a href='{% url "aset:update-dekorasi" dekorasi.1 %}'>Update</a></td>
+        <td><a href='{% url "aset:update-dekorasi" dekorasi.0 dekorasi.1 dekorasi.2 dekorasi.3 dekorasi.4 %}'>Update</a></td>
       {% endif %}
     </tr>
     

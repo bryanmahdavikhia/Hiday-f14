@@ -23,13 +23,14 @@
     {% for alat in data %} 
     <tr>
       <td>{{ forloop.counter }}</td>
+      <td>{{ alat.0 }}</td>
       <td>{{ alat.1 }}</td>
       <td>{{ alat.2 }}</td>
       <td>{{ alat.3 }}</td>
       <td>{{ alat.4 }}</td>
       <td>{{ alat.5 }}</td>
       {% if role %}
-        <td><a href='{% url "aset:update-alat" alat.1 %}'>Update</a></td>
+        <td><a href='{% url "aset:update-alat" alat.0 alat.1 alat.2 alat.3 alat.4 %}'>Update</a></td>
       {% endif %}
       
     </tr>

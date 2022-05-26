@@ -10,16 +10,18 @@
   
 <form method="post">
   {% csrf_token %}
-  p>ID</p>
-  <input type="text" value="HWXXX" disabled>
+  <p>Id</p>
+  <input type="text" name="id" value={{id}} disabled>
   <p>Nama</p>
   <input type="text" name="nama" value={{nama}} disabled>
   <p>Minimum Level:</p>
-  <input type="number" name="min_level" required>
+  <input type="number" name="min_level" value={{min_level}} required>
   <p>Harga Beli:</p>
-  <input type="number" name="harga" required>
+  <input type="number" name="harga_beli" value={{harga_beli}} required>
   <p>Durasi Produksi:</p>
   <input type="number" name="durasi_produksi" required>
+  <p>Id Kandang</p>
+  <input type="text" name="id_kandang" value={{id_kandang}} disabled>
   <button type="submit">Simpan</button>
 </form>
 {% endblock content %}

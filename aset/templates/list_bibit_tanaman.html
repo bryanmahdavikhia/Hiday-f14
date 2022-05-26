@@ -22,13 +22,14 @@
     {% for bibit in data %} 
     <tr>
       <td>{{ forloop.counter }}</td>
+      <td>{{ bibit.0 }}</td>
       <td>{{ bibit.1 }}</td>
       <td>{{ bibit.2 }}</td>
       <td>{{ bibit.3 }}</td>
       <td>{{ bibit.4 }}</td>
       <td>{{ bibit.5 }}</td>
       {% if role %}
-        <td><a href='{% url "aset:update-bibit" bibit.1 %}'>Update</a></td>
+        <td><a href='{% url "aset:update-bibit" bibit.0 bibit.1 bibit.2 bibit.3 %}'>Update</a></td>
       {% endif %}
     </tr>
     {% endfor %}
