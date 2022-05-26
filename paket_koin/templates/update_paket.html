@@ -11,10 +11,10 @@
 <form method="post">
   {% csrf_token %}
   <p disabled>Jumlah Koin</p>
-  <input type="text" name="value" value={{value}} disabled>
+  <input type="number" name="value" value={{value}} disabled>
   
   <p>Harga:</p>
-  <input type="text" name="harga" value={{harga}} required>
+  <input type="number" name="harga" value={{harga}} required>
   <button type="submit">Simpan</button>
 </form>
 {% endblock content %}

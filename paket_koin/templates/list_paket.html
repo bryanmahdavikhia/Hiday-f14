@@ -11,6 +11,7 @@
       border:1px solid black;
     }
 </style>
+<h3>Daftar Paket Koin</h3>
 <table style="width:50%">
     <tr>
         <th>No</th>
@@ -25,7 +26,14 @@
         <td>{{ i.1 }}</td>
         {% if role %}
             <td><a href='{% url "paket_koin:update_paket" i.0 i.1 %}'>Update</a>
-            <a href="#">Delete</a></td>
+            {% if i not in hapus%}
+            <form method="post">
+            {% csrf_token %}
+                <input type="hidden" name="jumlah" value={{i.0}}>
+                <input type="hidden" name="harga" value={{i.1}}>
+                <button type="submit">Delete</button></td>
+            </form>
+            {% endif %}
         {%else%}
             <td><a href='{% url "paket_koin:beli_paket_koin" i.0 i.1 %}'>Beli</a></td>
         {% endif %}
