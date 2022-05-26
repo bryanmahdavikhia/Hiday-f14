@@ -98,8 +98,13 @@ def transaksi_upgrade_lumbung(request):
             cursor.execute("SET search_path TO hidayf14")
             cursor.execute("SELECT * FROM lumbung l WHERE l.email = '" + request.session['account'][0] + "'")
             data = cursor.fetchall()
+            level = data[0][1]
+            kapasitas = data[0][2]
+            level_upgrade = level+1
+            kapasitas_upgrade = kapasitas+50
+            print(level)
             
-    return render(request, 'transaksi_upgrade_lumbung.html', {'data':data, 'role': role})
+    return render(request, 'transaksi_upgrade_lumbung.html', {'data':data, 'role': role, 'level':level_upgrade, 'kapasitas':kapasitas_upgrade})
  
 def histori_tanaman(request):
     cursor = connection.cursor()

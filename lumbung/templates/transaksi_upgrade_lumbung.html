@@ -10,18 +10,14 @@
   
 <form method="post">
   {% csrf_token %}
-  <p disabled>ID Bibit Tanaman: {{data.0}}</p>
-  <select name="type">
-    <option value = "BT001">BT001</option>
-    <option value = "BT002">BT002</option>
-    <option value = "BT003">BT003</option>
-</select>
+  <p disabled>Level Lumbung: {{data.0.1}} -> {{level}}</p>
+  <input type="hidden" name="level" value={{level}} disabled>
   
-  <p>jumlahg:</p>
-  <input type="number" name="kapasitas" required>
+  <p>Kapasitas Lumbung: {{data.0.2}} -> {{kapasitas}}</p>
+  <input type="hidden" name="kapasitas" value={{kapasitas}} disabled>
 
-  <p>XP:</p>
-  <input type="number" name="harga" value=5 disabled>
+  <p>Biaya: 200</p>
+  <input type="hidden" name="harga" value=200 disabled>
   <button type="submit">Upgrade</button>
 </form>
 {% endblock content %}

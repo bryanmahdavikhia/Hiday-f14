@@ -6,18 +6,27 @@
 {% endblock meta %}
 
 {% block content %}
-<h2>Transaksi Upgrade Lumbung</h2>
+<h2>Produksi Tanaman</h2>
   
 <form method="post">
   {% csrf_token %}
-  <p disabled>Level Lumbung:</p>
-  <input type="number" name="level" value={{data.0.1}} disabled>
-  
-  <p>Kapasitas Lumbung:</p>
-  <input type="number" name="kapasitas" value={{data.0.2}} disabled>
+  <p disabled>ID Bibit Tanaman: </p>
 
-  <p>Biaya:</p>
-  <input type="number" name="harga" value=200 disabled>
+<select name="type">
+  {% for i in data %}
+    <option value = {{i.0}}>{{i.0}}</option>
+    {% comment %} <option value = "BT002">BT002</option>
+    <option value = "BT003">BT003</option> {% endcomment %}
+    {% endfor %}
+</select>
+
+
+  
+  <p>jumlah:</p>
+  <input type="number" name="kapasitas" required>
+
+  <p>XP:</p>
+  <input type="number" name="harga" value=5 disabled>
   <button type="submit">Upgrade</button>
 </form>
 {% endblock content %}
