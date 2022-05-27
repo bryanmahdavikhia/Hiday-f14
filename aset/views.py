@@ -81,7 +81,7 @@ def form_kandang(request):
                     id = str(id)
                     id = "KD" + str(int(id[4:7]) + 1).zfill(3)
                 cursor.execute("INSERT INTO aset VALUES (%s, %s, %s, %s)", [id, nama, min_level, harga_beli])
-                cursor.execute("INSERT INTO kandang VALUES (%s, %s)", [id, kapasitas_maks, jenis_hewan])
+                cursor.execute("INSERT INTO kandang VALUES (%s, %s, %s)", [id, kapasitas_maks, jenis_hewan])
                 return redirect("aset:list-kandang")
             else:
                 return render(request, 'form_kandang.html')
@@ -169,7 +169,7 @@ def form_beli_aset(request):
     cursor.execute("SET search_path TO public")
     if request.session.has_key('account'):
         role = request.session['role']
-        if role == "admin":
+        if role == "pengguna":
             if request.method == "POST":
                 detail_aset = request.POST["detail_aset"]
                 jumlah = request.POST["jumlah"]
@@ -394,15 +394,14 @@ def update_dekorasi(request, nama, id, min_level, harga_beli, harga_jual):
     if request.session.has_key('account'):
         if request.session['role'] == "admin":
             if request.method == "POST":
-                #id = request.POST["id"]
-                #nama = request.POST["nama"]
-                #min_level = request.POST["min_level"]
-                #harga_beli = request.POST.get("harga_beli")
-                #harga_jual = request.POST.get("harga_jual")
-                #cursor.execute("SET search_path TO hidayf14")
-                #cursor.execute("SELECT id FROM aset WHERE id LIKE '%DK%' ORDER BY id DESC LIMIT 1")
-                #cursor.execute("UPDATE aset SET min_level,harga_beli (%s, %s) WHERE ", [min_level, harga_beli])
-                #cursor.execute("UPDATE INTO dekorasi VALUES (%s, %s)", [id, harga_jual])
+                id_dekorasi = request.POST.get("id")
+                nama = request.POST.get("nama")
+                min_level = request.POST.get("min_level")
+                harga_beli = request.POST.get("harga_beli")
+                harga_jual = request.POST.get("harga_jual")
+                cursor.execute("SET search_path TO hidayf14")
+                cursor.execute("UPDATE aset SET minimum_level = %s, harga_beli = %s WHERE id = %s", [int(min_level), int(harga_beli), id_dekorasi])
+                cursor.execute("UPDATE dekorasi SET harga_jual = %s WHERE id_aset = %s", [int(harga_jual), id_dekorasi])
                 return redirect("aset:list-dekorasi")
             else:
                 return render(request, 'update_dekorasi.html', {'id': id, 'nama': nama, 'min_level': min_level, 'harga_beli': harga_beli, 'harga_jual': harga_jual, 'role': request.session['role']})
@@ -415,6 +414,12 @@ def update_bibit(request, nama, id, min_level, harga_beli):
     if request.session.has_key('account'):
         if request.session['role'] == "admin":
             if request.method == "POST":
+                id_bibit_tanaman = request.POST.get("id")
+                nama = request.POST.get("nama")
+                min_level = request.POST.get("min_level")
+                harga_beli = request.POST.get("harga_beli")
+                cursor.execute("SET search_path TO hidayf14")
+                cursor.execute("UPDATE aset SET minimum_level = %s, harga_beli = %s WHERE id = %s", [int(min_level), int(harga_beli), id_bibit_tanaman])
                 return redirect("aset:list-bibit-tanaman")
             else:
                 return render(request, 'update_bibit_tanaman.html', {'id': id, 'nama': nama, 'min_level': min_level, 'harga_beli': harga_beli, 'role': request.session['role']})
@@ -427,6 +432,14 @@ def update_kandang(request, nama, id, min_level, harga_beli, kapasitas_maks, jen
     if request.session.has_key('account'):
         if request.session['role'] == "admin":
             if request.method == "POST":
+                id_kandang = request.POST.get("id")
+                nama = request.POST.get("nama")
+                min_level = request.POST.get("min_level")
+                harga_beli = request.POST.get("harga_beli")
+                kapasitas_maksimal = request.POST.get("kapasitas_maks")
+                cursor.execute("SET search_path TO hidayf14")
+                cursor.execute("UPDATE aset SET minimum_level = %s, harga_beli = %s WHERE id = %s", [int(min_level), int(harga_beli), id_kandang])
+                cursor.execute("UPDATE kandang SET kapasitas_maks = %s WHERE id_aset = %s", [kapasitas_maksimal, id_kandang])
                 return redirect("aset:list-kandang")
             else:
                 return render(request, 'update_kadandang.html', {'id': id, 'nama': nama, 'min_level': min_level, 'harga_beli': harga_beli, 'kapasitas_maks': kapasitas_maks, 'jenis_hewan': jenis_hewan, 'role': request.session['role']})
@@ -439,6 +452,14 @@ def update_hewan(request, nama, id, min_level, harga_beli, id_kandang):
     if request.session.has_key('account'):
         if request.session['role'] == "admin":
             if request.method == "POST":
+                id_hewan = request.POST.get("id")
+                nama = request.POST.get("nama")
+                min_level = request.POST.get("min_level")
+                harga_beli = request.POST.get("harga_beli")
+                durasi_produksi = request.POST.get("durasi_produksi")
+                id_kandang = request.POST.get("id_kandang")
+                cursor.execute("SET search_path TO hidayf14")
+                cursor.execute("UPDATE aset SET minimum_level = %s, harga_beli = %s WHERE id = %s", [int(min_level), int(harga_beli), id_hewan])
                 return redirect("aset:list-hewan")
             else:
                 return render(request, 'update_hewan.html', {'id': id, 'nama': nama, 'min_level': min_level, 'harga_beli': harga_beli, 'id_kandang': id_kandang, 'role': request.session['role']})
@@ -451,11 +472,19 @@ def update_alat(request, nama, id, min_level, harga_beli, kapasitas_maks):
     if request.session.has_key('account'):
         if request.session['role'] == "admin":
             if request.method == "POST":
-                return redirect("aset:list-alat-produksi")
+                id_alat = request.POST.get("id")
+                nama = request.POST.get("nama")
+                min_level = request.POST.get("min_level")
+                harga_beli = request.POST.get("harga_beli")
+                kapasitas_maksimal = request.POST.get("kapasitas_maks")
+                cursor.execute("SET search_path TO hidayf14")
+                cursor.execute("UPDATE aset SET minimum_level = %s, harga_beli = %s WHERE id = %s", [int(min_level), int(harga_beli), id_alat])
+                cursor.execute("UPDATE alat_produksi SET kapasitas_maks = %s WHERE id_aset = %s", [kapasitas_maksimal, id_alat])
+                return redirect("aset:list-alat")
             else:
                 return render(request, 'update_alat_produksi.html', {'id': id, 'nama': nama, 'min_level': min_level, 'harga_beli': harga_beli, 'kapasitas_maks': kapasitas_maks, 'role': request.session['role']})
         else:
-            return redirect("aset:list-alat-produksi")
+            return redirect("aset:list-alat")
 
 def update_petak_sawah(request, nama, id, min_level, harga_beli):
     cursor = connection.cursor()
@@ -463,6 +492,12 @@ def update_petak_sawah(request, nama, id, min_level, harga_beli):
     if request.session.has_key('account'):
         if request.session['role'] == "admin":
             if request.method == "POST":
+                id_petak_sawah = request.POST.get("id")
+                nama = request.POST.get("nama")
+                min_level = request.POST.get("min_level")
+                harga_beli = request.POST.get("harga_beli")
+                cursor.execute("SET search_path TO hidayf14")
+                cursor.execute("UPDATE aset SET minimum_level = %s, harga_beli = %s WHERE id = %s", [int(min_level), int(harga_beli), id_petak_sawah])
                 return redirect("aset:list-petak-sawah")
             else:
                 return render(request, 'update_petak_sawah.html', {'id': id, 'nama': nama, 'min_level': min_level, 'harga_beli': harga_beli, 'role': request.session['role']})
