@@ -2,7 +2,6 @@ from hashlib import new
 import re
 from django.db import connection
 from django.shortcuts import redirect, render
-from collections import namedtuple
 
 # Create your views here.
 def create_paket(request):
@@ -111,8 +110,8 @@ def beli_paket_koin(request, value, harga):
                 
                 cursor.execute("SET search_path TO hidayf14")
                 cursor.execute("select (now() + interval '7 hours')::timestamp")
-                ts = tuple_fetch(cursor)
-                time_str = str(ts[0][0])
+                timestamp = cursor.fetchall()
+                time_str = str(timestamp[0][0])
                     
                 
                 cursor.execute("INSERT INTO transaksi_pembelian_koin VALUES ('"+request.session['account'][0]+"', '"+time_str + "'::timestamp, '"+ str(jumlah)+"', '"+str(cara)+"', '"+str(value)+"', '"+ str(total_biaya)+"')")
@@ -123,9 +122,3 @@ def beli_paket_koin(request, value, harga):
             return redirect("paket_koin:list_transaksi")
     else:
         return redirect("home:login")
-
-
-def tuple_fetch(cursor):
-    desc = cursor.description
-    nt_result = namedtuple('Result', [col[0] for col in desc])
-    return [nt_result(*row) for row in cursor.fetchall()]

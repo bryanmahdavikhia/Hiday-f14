@@ -3,6 +3,7 @@ import re
 from django.db import connection
 from collections import namedtuple
 from django.shortcuts import redirect, render
+from django.contrib import messages
 
 # Create your views here.
 
@@ -102,8 +103,25 @@ def transaksi_upgrade_lumbung(request):
             kapasitas = data[0][2]
             level_upgrade = level+1
             kapasitas_upgrade = kapasitas+50
-            print(level)
             
+            cursor.execute("SELECT koin FROM pengguna WHERE email = '"+ request.session['account'][0] + "'")
+            koin = cursor.fetchall()
+            coin = koin[0][0]
+            print(coin)
+            
+            
+            if request.method == "POST":
+                if coin < 200:
+                    messages.warning(request, "Koin anda tidak cukup, silahkan cari Koin terlebih dahulu.")
+                else:
+                    cursor.execute("select (now() + interval '7 hours')::timestamp")
+                    timestamp = cursor.fetchall()
+                    time_str = str(timestamp[0][0])
+                    
+                    cursor.execute("INSERT into transaksi_upgrade_lumbung VALUES ('"+request.session['account'][0]+"', '"+time_str + "'::timestamp)")
+                    cursor.execute("UPDATE lumbung SET level = %s, kapasitas_maksimal = %s where email = %s", [level_upgrade, kapasitas_upgrade, request.session['account'][0]])
+                    
+                    return redirect('lumbung:list_transaksi')
     return render(request, 'transaksi_upgrade_lumbung.html', {'data':data, 'role': role, 'level':level_upgrade, 'kapasitas':kapasitas_upgrade})
  
 def histori_tanaman(request):
@@ -119,12 +137,31 @@ def histori_tanaman(request):
             
         if role == None:
             cursor.execute("SET search_path TO hidayf14")
-            cursor.execute("SELECT id_aset FROM bibit_tanaman")
+            cursor.execute("SELECT bt.id_aset FROM bibit_tanaman bt, koleksi_aset_memiliki_aset ka WHERE bt.id_aset = ka.id_aset and ka.id_koleksi_aset = %s", [request.session['account'][0]])
             data = cursor.fetchall()
-            
+            print(data)
+            if request.method == "POST":
+                bibit = request.POST["bibit"]
+                jumlah = int(request.POST["jumlah"])
+                # xp = request.POST["xp"]
+                xp = 5
+                
+                cursor.execute("select jumlah from koleksi_aset_memiliki_aset where id_aset = %s and id_koleksi_aset = %s", [bibit, request.session['account'][0]])
+                banyak = cursor.fetchall()
+                if jumlah > banyak[0][0]:
+                    messages.warning(request, "Anda tidak memiliki bibit yang cukup, silahkan membeli bibit terlebih dahulu")
+                else:
+                    xp_dapat = xp*jumlah
+                    cursor.execute("select (now() + interval '7 hours')::timestamp")
+                    timestamp = cursor.fetchall()
+                    time_str = str(timestamp[0][0])
+                    
+                    cursor.execute("insert into histori_produksi values ('"+request.session['account'][0]+"', '"+time_str + "'::timestamp, '"+time_str + "'::timestamp, '"+str(jumlah)+"', '"+str(xp_dapat)+"')")
+                    cursor.execute("insert into histori_tanaman values ('"+request.session['account'][0]+"', '"+time_str + "'::timestamp, '"+str(bibit)+"')")
+                    return redirect("lumbung:list_histori_tanaman")
     return render(request, 'histori_tanaman.html', {'data':data, 'role': role})
 
-def list_histori_tanaman(request):
+def list_histori_tanaman(request): 
     cursor = connection.cursor()
     cursor.execute("SET search_path TO public")
     
