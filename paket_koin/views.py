@@ -15,8 +15,8 @@ def create_paket(request):
                 value = request.POST["value"]
                 price = request.POST["price"]
                 
-                # cursor.execute("SET search_path TO hidayf14")
-                # cursor.execute("INSERT INTO paket_koin VALUES (%s, %s)", [value, price])
+                cursor.execute("SET search_path TO hidayf14")
+                cursor.execute("INSERT INTO paket_koin VALUES (%s, %s)", [value, price])
                 return redirect("paket_koin:list_paket")
             else:
                 return render(request, "create_paket.html", {})
@@ -39,7 +39,18 @@ def list_paket(request):
     cursor.execute("SET search_path TO hidayf14")
     cursor.execute("SELECT * FROM paket_koin")
     data = cursor.fetchall()
-    return render(request, 'list_paket.html', {'data': data, 'role': role})
+    cursor.execute("SELECT distinct tpk.paket_koin, pk.harga FROM transaksi_pembelian_koin tpk, paket_koin pk WHERE tpk.paket_koin = pk.jumlah_koin")
+    hapus = cursor.fetchall()
+
+    if request.method == "POST":
+        jumlah = request.POST["jumlah"]
+        harga = request.POST["harga"]
+            
+        cursor.execute("SET search_path TO hidayf14")
+        cursor.execute("DELETE from paket_koin WHERE jumlah_koin = %s and harga = %s", [jumlah, harga])
+        return redirect("paket_koin:list_paket")
+    
+    return render(request, 'list_paket.html', {'data': data, 'role': role, 'hapus':hapus})
 
 def update_paket(request, value, harga):
     cursor = connection.cursor()
@@ -49,6 +60,10 @@ def update_paket(request, value, harga):
         role = request.session['role']
         if role == "admin":
             if request.method == "POST":
+                price = request.POST["harga"]
+                
+                cursor.execute("SET search_path TO hidayf14")
+                cursor.execute("UPDATE paket_koin SET harga = %s WHERE jumlah_koin = %s", [price, value])
                 return redirect("paket_koin:list_paket")
             else:
                 return render(request, 'update_paket.html', {'value': value, 'role': role, 'harga':harga})
@@ -91,9 +106,15 @@ def beli_paket_koin(request, value, harga):
             if request.method == "POST":
                 jumlah = request.POST["jumlah"]
                 cara = request.POST["cara"]
+                total_biaya = int(jumlah)*int(harga)
                 
-                # cursor.execute("SET search_path TO hidayf14")
-                # cursor.execute("INSERT INTO paket_koin VALUES (%s, %s)", [value, price])
+                cursor.execute("SET search_path TO hidayf14")
+                cursor.execute("select (now() + interval '7 hours')::timestamp")
+                timestamp = cursor.fetchall()
+                time_str = str(timestamp[0][0])
+                    
+                
+                cursor.execute("INSERT INTO transaksi_pembelian_koin VALUES ('"+request.session['account'][0]+"', '"+time_str + "'::timestamp, '"+ str(jumlah)+"', '"+str(cara)+"', '"+str(value)+"', '"+ str(total_biaya)+"')")
                 return redirect("paket_koin:list_transaksi")
             else:
                 return render(request, "beli_paket_koin.html", {'value': value, 'role': role, 'harga': harga})
@@ -101,6 +122,3 @@ def beli_paket_koin(request, value, harga):
             return redirect("paket_koin:list_transaksi")
     else:
         return redirect("home:login")
-
-
-

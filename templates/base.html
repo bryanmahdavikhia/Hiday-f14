@@ -98,9 +98,9 @@
               {% endif %}
               <li><a class="dropdown-item" href="#">List Histori Produksi Hewan</a></li>
               {% if request.session.role == "pengguna" %}
-              <li><a class="dropdown-item" href="#">Produksi Tanaman</a></li>
+              <li><a class="dropdown-item" href="/lumbung/histori-tanaman">Produksi Tanaman</a></li>
               {% endif %}
-              <li><a class="dropdown-item" href="#">List Histori Produksi Tanaman</a></li>
+              <li><a class="dropdown-item" href="/lumbung/list-histori-tanaman">List Histori Produksi Tanaman</a></li>
               {% if request.session.role == "pengguna" %}
               <li><a class="dropdown-item" href="/product/create-history">Produksi Produk Makanan</a></li>
               {% endif %}
