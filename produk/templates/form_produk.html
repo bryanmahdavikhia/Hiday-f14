@@ -17,11 +17,11 @@
       <option value = "produk makanan">Produk Makanan</option>
   </select>
   <p>Nama</p>
-  <input type="text" name="name" required>
+  <input type="text" name="name" maxlength="50" required>
   <p>Harga Jual:</p>
   <input type="number" name="price" required>
   <p>Sifat Produk:</p>
-  <input type="text" name="characteristic" required>
+  <input type="text" name="characteristic" maxlength="20" required>
   <button type="submit">Tambahkan</button>
 </form>
 {% endblock content %}

@@ -10,14 +10,21 @@
   
 <form method="post">
   {% csrf_token %}
+    <input type="text" name="id" value="{{ data.0 }}" hidden> 
   <p>Jenis Produk</p>
-  <input type="text" name="type" value="hasil panen" disabled>
+  {% if data.0|truncatechars:2 == "HP" %}
+    <input type="text" name="type" value="Hasil Panen" disabled>
+  {% elif data.0|truncatechars:2 == "PH" %}
+    <input type="text" name="type" value="Produk Hewan" disabled>
+  {% else %}
+    <input type="text" name="type" value="Produk Makanan" disabled>
+  {% endif %}
   <p>Nama</p>
-  <input type="text" name="name" value="dummy hasil panen" disabled>
+  <input type="text" name="name" value="{{ data.1 }}" disabled>
   <p>Harga Jual:</p>
   <input type="number" name="price" required>
   <p>Sifat Produk:</p>
-  <input type="text" name="characteristic" required>
-  <button type="submit">Tambahkan</button>
+  <input type="text" name="characteristic" maxlength="20" required>
+  <button type="submit">Simpan</button>
 </form>
 {% endblock content %}
