@@ -31,7 +31,8 @@ def list_lumbung(request):
         cursor.execute("SET search_path TO public")
         return render(request, 'list_lumbung.html', {'role': role, 'hasil_panen': hasil_panen, 'hewan': hewan, 'makanan': makanan })
     else:
-        
+        cursor.execute("SELECT * FROM LUMBUNG WHERE email = %s", [request.session['account'][0]])
+        data_lumbung = cursor.fetchone()
         # Produk Hasil Panen
         hasil_panen = object_entitas("select email, id, nama, harga_jual, sifat_produk, jumlah from lumbung l, lumbung_memiliki_produk lmp, produk p where l.email = lmp.id_lumbung and lmp.id_produk = p.id and l.email = '"+ request.session['account'][0] +"' and p.id in (select * from hasil_panen)")
         # Produk Hewan

@@ -6,6 +6,14 @@
 {% endblock meta %}
 
 {% block content %}
-  <h1>Hello, {{ role }}!!</h1>
-  <p><a href="{% url 'home:logout' %}">Log Out</a></p>
+  <p>Email: {{ email }}</p>
+  {% if farm_details %}
+    {% for i in farm_details %} 
+    <p>Nama Area Pertanian: {{ i.2 }}</p>
+    <p>XP: {{ i.3 }}</p>
+    <p>Koin: {{ i.4 }}</p>
+    <p>Level: {{ i.5 }}</p>
+    {% endfor %}
+  {% endif %}
+
 {% endblock content %}

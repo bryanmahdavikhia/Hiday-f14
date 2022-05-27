@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block meta %}
-<title>List Produk</title>
+<title>List Produksi</title>
 {% endblock meta %}
 
 {% block content %}
@@ -27,8 +27,10 @@
       <td>
         <a href="/product/detail-production/{{forloop.counter}}">Detail<br></a>
       {% if role %}
-        <a href="/product/update-production">Update<br></a>
-        <a>delete</a>
+        <a href="/product/update-production/{{forloop.counter}}">Update<br></a>
+        {% if i.4 %}
+          <a href="/product/delete-production/{{forloop.counter}}">delete</a>
+        {% endif %}
       {% endif %}
       </td>
     </tr>

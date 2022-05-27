@@ -20,11 +20,23 @@
     {% for i in data %} 
     <tr>
       <td>{{ forloop.counter }}</td>
+      {% if i.0|slice:":2" == "HP" %}
+        <td>Hasil Panen</td>
+      {% elif i.0|slice:":2" == "PH" %}
+        <td>Produk Hewan</td>
+      {% else %}
+        <td>Produk Makanan</td>
+      {% endif %}
       <td>{{ i.1 }}</td>
       <td>{{ i.2 }}</td>
       <td>{{ i.3 }}</td>
       {% if role %}
-        <td><a href="/produk/update-product">Update</a></td>
+        <td>
+          <a href="/product/update-product/{{ i.0 }}">Update</a>
+          {% if i.4 %}
+          <br><a href="/product/delete-product/{{ i.0 }}">delete</a>
+          {% endif %}
+        </td>
       {% endif %}
     </tr>
     {% endfor %}

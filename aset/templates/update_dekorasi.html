@@ -11,15 +11,15 @@
 <form method="post">
   {% csrf_token %}
   <p>ID:</p>
-  <input type="text" name="type" value="DKXXX" disabled>
+  <input type="text" name="id" value={{id}} disabled>
   <p>Nama:</p>
-  <input type="text" name="name" value="Nama" disabled>
+  <input type="text" name="nama" value={{nama}} disabled> 
   <p>Minimum Level:</p>
-  <input type="number" name="min level" required>
+  <input type="number" name="min_level" value={{min_level}} required>
   <p>Harga Beli:</p>
-  <input type="text" name="harga beli" required>
+  <input type="text" name="harga_beli" value={{harga_beli}} required>
   <p>Harga Jual:</p>
-  <input type="text" name="harga jual" required>
+  <input type="text" name="harga_jual" value={{harga_jual}} required>
   <button type="submit">Simpan</button>
 </form>
 {% endblock content %}

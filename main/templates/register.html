@@ -5,11 +5,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login</title>
+  <title>Register</title>
 </head>
 
 <body>
-<h2>Login</h2>
+<h2>Register</h2>
   
 <form method="post">
   {% csrf_token %}
@@ -17,6 +17,12 @@
   <p><input type="email" name="email" maxlength="50" required></p>
   <p>Password</p>
   <p><input type="password" name="password" maxlength="25" required></p>
+  {% if user %}
+  <p>Nama Area Pertanian: </p>
+  <p><input type="text" name="farm_name" maxlength="25" required></p>
+  {% else %}
+  <p><input type="text" values= "" name="farm_name" hidden></p>
+  {% endif %}
   {% if messages %}
     {% for message in messages %}
     <a{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</a>
