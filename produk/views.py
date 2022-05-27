@@ -167,7 +167,7 @@ def list_production(request):
         else:
             role = None
         cursor.execute("SET search_path TO hidayf14") #buat indexing ntar
-        query = "SELECT pr.nama, a.nama, x.durasi, x.jumlah_unit_hasil, CASE "
+        query = "SELECT pr.nama, a.nama, extract(epoch FROM x.durasi::interval)::int / 60 AS durasi, x.jumlah_unit_hasil, CASE "
         query += "WHEN exists(SELECT * FROM histori_produksi_makanan WHERE histori_produksi_makanan.id_alat_produksi = x.id_alat_produksi "
         query += "AND histori_produksi_makanan.id_produk_makanan = x.id_produk_makanan) THEN false ELSE true END "
         query += "FROM (SELECT * FROM produksi p, alat_produksi ap, produk_makanan pm "
@@ -183,7 +183,7 @@ def detail_production(request, id):
 
     if request.session.has_key('account'):
         cursor.execute("SET search_path TO hidayf14")
-        query = "SELECT pr.nama, a.nama, x.durasi, x.jumlah_unit_hasil, x.id_produk_makanan "
+        query = "SELECT pr.nama, a.nama, extract(epoch FROM x.durasi::interval)::int / 60 AS durasi, x.jumlah_unit_hasil, x.id_produk_makanan "
         query += "FROM (SELECT * FROM produksi p, alat_produksi ap, produk_makanan pm "
         query += "WHERE p.id_alat_produksi = ap.id_aset and p.id_produk_makanan = pm.id_produk) "
         query += "x LEFT OUTER JOIN aset a ON x.id_alat_produksi = a.id LEFT OUTER JOIN produk pr ON x.id_produk_makanan = pr.id"
@@ -282,17 +282,19 @@ def create_product_history(request):
                             continue
                     messages.add_message(request, messages.INFO, 'Anda tidak memiliki bahan yang cukup, silahkan menambahkan produk yang akan digunakan sebagai bahan terlebih dahulu')
                     return redirect("product:create_product_history")
-                cursor.execute("SELECT id_alat_produksi FROM produksi WHERE id_produk_makanan = %s", [food_id])
+                cursor.execute("SELECT id_alat_produksi, durasi FROM produksi WHERE id_produk_makanan = %s", [food_id])
                 tool = cursor.fetchone()
-                cursor.execute("SELECT * FROM koleksi_aset_memiliki_aset WHERE id_koleksi_aset = %s AND id_aset = %s", [request.session['account'][0], tool])
+                cursor.execute("SELECT * FROM koleksi_aset_memiliki_aset WHERE id_koleksi_aset = %s AND id_aset = %s", [request.session['account'][0], tool[0]])
                 exist = cursor.fetchone()
                 if exist == None:
                     messages.add_message(request, messages.INFO, 'Anda tidak memiliki alat yang dibutuhkan')
                     return redirect("product:create_product_history")
                 time = datetime.datetime.now()
-                print(amount*5)
-                cursor.execute("INSERT INTO histori_produksi(EMAIL, WAKTU_AWAL, WAKTU_SELESAI, JUMLAH, XP) VALUES (%s, %s, %s, %s, %s)", [request.session['account'][0], time, time, int(amount), int(amount)*5])
-                cursor.execute("INSERT INTO histori_produksi_makanan VALUES(%s, %s, %s, %s)", [request.session['account'][0], time, tool, food_id])
+                duration = datetime.timedelta(hours=tool[1].hour, minutes=tool[1].minute, seconds=tool[1].second)
+                finished_time = time + duration
+                # finished_time = time + datetime.timedelta(seconds=int(tool[1].total_seconds()))
+                cursor.execute("INSERT INTO histori_produksi(EMAIL, WAKTU_AWAL, WAKTU_SELESAI, JUMLAH, XP) VALUES (%s, %s, %s, %s, %s)", [request.session['account'][0], time, finished_time , int(amount), int(amount)*5])
+                cursor.execute("INSERT INTO histori_produksi_makanan VALUES(%s, %s, %s, %s)", [request.session['account'][0], time, tool[0], food_id])
                 return redirect("product:list_history")
             else:
                 cursor.execute("SET search_path TO hidayf14")
@@ -314,7 +316,7 @@ def list_product_history(request):
         else:
             role = None
         email = request.session['account']
-        cursor.execute("SET search_path TO hidayf14") #buat indexing ntar yang sama kek detail production
+        cursor.execute("SET search_path TO hidayf14")
         query = "SELECT hpm.email, hpm.waktu_awal::time, hp.waktu_selesai::time, hp.jumlah, hp.xp, pr.nama, a.nama "
         query += "FROM histori_produksi_makanan hpm LEFT OUTER JOIN histori_produksi hp "
         query += "ON (hpm.email = hp.email AND hpm.waktu_awal = hp.waktu_awal)"

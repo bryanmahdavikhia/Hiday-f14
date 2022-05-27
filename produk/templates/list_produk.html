@@ -20,9 +20,9 @@
     {% for i in data %} 
     <tr>
       <td>{{ forloop.counter }}</td>
-      {% if i.0|truncatechars:2 == "HP" %}
+      {% if i.0|slice:":2" == "HP" %}
         <td>Hasil Panen</td>
-      {% elif i.0|truncatechars:2 == "PH" %}
+      {% elif i.0|slice:":2" == "PH" %}
         <td>Produk Hewan</td>
       {% else %}
         <td>Produk Makanan</td>
