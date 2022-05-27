@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block meta %}
+<title>List Koleksi Bibit Tanaman</title>
+{% endblock meta %}
+
+{% block content %}
+
+<h1>List Koleksi Bibit Tanaman</h1>
+<table>
+    <tr>
+      {% if role %}
+      <th>Email</th>
+      {% endif %}
+      <th>Nama Aset</th>
+      <th>Minimum Level</th>
+      <th>Harga Beli</th>
+      <th>Jumlah</th>
+      {% if role %}
+      <th>Action</th>
+      {% endif %}
+    </tr>
+    {% for transaksi in data %} 
+    <tr>
+      <td>{{ forloop.counter }}</td>
+      {% if role %}
+      <td>{{ transaksi.0 }}</td>
+      {% endif %}
+      <td>{{ transaksi.1 }}</td>
+      <td>{{ transaksi.2 }}</td>
+      <td>{{ transaksi.3 }}</td>
+      <td>{{ transaksi.4 }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock content %}

@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block meta %}
+<title>Pilihan Koleksi Aset</title>
+{% endblock meta %}
+
+{% block content %}
+
+
+<div class="center">
+    <div class="container text-center">
+        <h1>Koleksi Aset Hi-Day</h1>
+        <div class="btn-group-vertical w-75">
+            <button onclick="window.location.href='list-koleksi-dekorasi/'" type="button" class="btn btn-primary btn-lg btn-block" style="margin-bottom: 10px ; border-radius: 10px !important"> Dekorasi </button>
+            
+            <button onclick="window.location.href='list-koleksi-bibit/'" type="button" class="btn btn-primary btn-lg btn-block" style="margin-bottom: 10px ; border-radius: 10px !important"> Bibit_Tanaman </button>
+            
+            <button onclick="window.location.href='list-koleksi-kandang/'" type="button" class="btn btn-primary btn-lg btn-block" style="margin-bottom: 10px ; border-radius: 10px !important"> Kandang </button>
+            <button onclick="window.location.href='list-koleksi-hewan/'" type="button" class="btn btn-primary btn-lg btn-block" style="margin-bottom: 10px ; border-radius: 10px !important"> Hewan </button>
+            <button onclick="window.location.href='list-koleksi-alat/'" type="button" class="btn btn-primary btn-lg btn-block" style="margin-bottom: 10px ; border-radius: 10px !important"> Alat_Produksi </button>
+            <button onclick="window.location.href='list-koleksi-petak-sawah/'" type="button" class="btn btn-primary btn-lg btn-block" style="margin-bottom: 10px ; border-radius: 10px !important"> Petak_Sawah </button>
+        </div>
+    </div>
+</div>
+{% endblock content %}
