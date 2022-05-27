@@ -10,24 +10,28 @@
   
 <form method="post">
   {% csrf_token %}
+  <input type="text" name="id_food" value="{{produksi.6}}" hidden>
+  <input type="text" name="id_tool" value="{{produksi.5}}" hidden>
   <p>Nama Produk Makanan</p>
-  <input type="text" name="food" value="dummy makanan" disabled>
+  <input type="text" name="food" value="{{produksi.0}}" disabled>
   <p>Alat Produksi</p>
-  <input type="text" name="tool" value="dummy alat" disabled>
+  <input type="text" name="tool" value="{{produksi.1}}" disabled>
   <p>Durasi Produksi (dalam menit):</p>
   <input type="number" name="duration" required>
-  <p>Sifat Produk:</p>
+  <p>Jumlah Produk yang Dihasilkan:</p>
   <input type="number" name="amount" required>
   <table>
     <tr>
       <th>Bahan</th>
       <th>Jumlah</th>
     </tr>
+    {% for i in bahan %} 
     <tr>
-      <td>dummy bahan</td>
-      <td>1</td>
+      <td>{{ i.0 }}</td>
+      <td>{{ i.1 }}</td>
     </tr>
-</table>
+    {% endfor %}
+  </table>
   <button type="submit">simpan</button>
 </form>
 {% endblock content %}

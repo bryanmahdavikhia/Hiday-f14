@@ -12,11 +12,15 @@
   {% csrf_token %}
   <p>Nama Produk Makanan</p>
   <select name="food">
-      <option value = "dummy makanan">dummy makanan</option>
+      {% for i in makanan %}
+      <option value = "{{i.1}}">{{ i.0 }}</option>
+      {% endfor %}
   </select>
   <p>Alat Produksi</p>
   <select name="tool">
-      <option value = "dummy alat">dummy alat</option>
+    {% for i in alat %}
+    <option value = "{{i.1}}">{{ i.0 }}</option>
+    {% endfor %}
   </select>
   <p>Durasi Produksi</p>
   <input type="number" name="duration" required>
@@ -26,10 +30,12 @@
   <div class="field_wrapper">
     <div>
       <select name="bahan[]">
-        <option value = "dummy bahan">dummy bahan</option>
+        {% for i in bahan %}
+          <option value = "{{i.1}}">{{ i.0 }}</option>
+        {% endfor %}
       </select>
       <a>jumlah: </a>
-      <input type="number" name="jumlah[]"/>
+      <input type="number" name="jumlah[]" required/>
       <a href="javascript:void(0);" class="add_button" title="Add field">tambah</a>
     </div>
   </div>
@@ -40,7 +46,7 @@
   $(document).ready(function(){
       var addButton = $('.add_button'); //Add button selector
       var wrapper = $('.field_wrapper'); //Input field wrapper
-      var fieldHTML = '<div><select name="bahan[]"><option value = "dummy bahan">dummy bahan</option></select><a>jumlah: </a><input type="number" name="jumlah[]" value=""/><a href="javascript:void(0);" class="remove_button">Hapus</a></div>'; //New input field html 
+      var fieldHTML = '<div><select name="bahan[]">{% for i in bahan %}<option value = "{{i.1}}">{{ i.0 }}</option>{% endfor %}</select><a>jumlah: </a><input type="number" name="jumlah[]" value="" required/><a href="javascript:void(0);" class="remove_button">Hapus</a></div>'; //New input field html 
       var x = 1; //Initial field counter is 1
       
       //Once add button is clicked
