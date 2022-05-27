@@ -12,9 +12,99 @@
       width:50;
     }
 </style>
-{% if role == none %}
-    <h3>Level: {{pengguna.0.1}}</h3>
-    <h3>Kapasitas: {{pengguna.0.3}}/{{pengguna.0.2}}</h3>
+{% if role %}
+<div class="table-wraper">
+    <table class ="table">
+        <thead>
+            <th>No</th>
+            <th>Email Pemilik Lumbung</th>
+            <th>ID Produk</th>
+            <th>Nama Produk</th>
+            <th>Harga Jual</th>
+            <th>Sifat Produk</th>
+            <th>Jumlah Produk</th>
+        </thead>
+        <tbody>
+            {%for j,i in hasil_panen %}
+            <tr>
+                <td id="number">{{j}}</td>
+                <td>{{i.email}}</td>
+                <td>{{i.id}}</td>
+                <td>{{i.nama}}</td>
+                <td>{{i.harga_jual}}</td>
+                <td>{{i.sifat_produk}}</td>
+                <td>{{i.jumlah}}</td>
+            </tr>
+            {% endfor %}
+    
+            
+        </tbody>
+    
+        </table>
+    </div>
+    
+    
+    <div class="table-wraper">
+        <table class ="table">
+            <thead>
+                <th>No</th>
+                <th>Email Pemilik Lumbung</th>
+                <th>ID Produk</th>
+                <th>Nama Produk</th>
+                <th>Harga Jual</th>
+                <th>Sifat Produk</th>
+                <th>Jumlah Produk</th>
+            </thead>
+            <tbody>
+                {%for j,i in hewan %}
+                <tr>
+                    <td id="number">{{j}}</td>
+                    <td>{{i.email}}</td>
+                    <td>{{i.id}}</td>
+                    <td>{{i.nama}}</td>
+                    <td>{{i.harga_jual}}</td>
+                    <td>{{i.sifat_produk}}</td>
+                    <td>{{i.jumlah}}</td>
+                </tr>
+                {% endfor %}
+        
+                
+            </tbody>
+        
+            </table>
+        </div>
+        <div class="table-wraper">
+            <table class ="table">
+                <thead>
+                    <th>No</th>
+                    <th>Email Pemilik Lumbung</th>
+                    <th>ID Produk</th>
+                    <th>Nama Produk</th>
+                    <th>Harga Jual</th>
+                    <th>Sifat Produk</th>
+                    <th>Jumlah Produk</th>
+                </thead>
+                <tbody>
+                    {%for j,i in makanan %}
+                    <tr>
+                        <td id="number">{{j}}</td>
+                        <td>{{i.email}}</td>
+                        <td>{{i.id}}</td>
+                        <td>{{i.nama}}</td>
+                        <td>{{i.harga_jual}}</td>
+                        <td>{{i.sifat_produk}}</td>
+                        <td>{{i.jumlah}}</td>
+                    </tr>
+                    {% endfor %}
+            
+                    
+                </tbody>
+            
+                </table>
+            </div>
+{% else %}
+    <h3>Level: {{ lumbung.1 }}</h3>
+    <h3>Kapasitas: {{ lumbung.2 }}</h3>
 
     <div class="table-wraper">
         <table class ="table">
