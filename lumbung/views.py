@@ -44,7 +44,7 @@ def list_lumbung(request):
         pengguna = cursor.fetchall()
         
         cursor.execute("SET search_path TO public")
-        return render(request, 'list_lumbung.html', {'role': role, 'hasil_panen': hasil_panen, 'hewan': hewan, 'makanan': makanan, 'pengguna': pengguna })
+        return render(request, 'list_lumbung.html', {'role': role, 'hasil_panen': hasil_panen, 'hewan': hewan, 'makanan': makanan, 'pengguna': pengguna, 'lumbung':data_lumbung })
         
 def object_entitas(query): # mengembalikan value relasi dalam bentuk object (class) dalam bentuk list
      # source code: https://dev.to/stndaru/connecting-django-to-postgresql-on-heroku-and-perform-sql-command-4m8e
