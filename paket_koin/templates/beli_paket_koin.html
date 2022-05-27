@@ -11,13 +11,13 @@
 <form method="post">
   {% csrf_token %}
   <p disabled>Jumlah Koin</p>
-  <input type="text" name="value" value={{value}} disabled>
+  <input type="number" name="value" value={{value}} disabled>
   
   <p>Harga:</p>
-  <input type="text" name="harga" value={{harga}} disabled>
+  <input type="number" name="harga" value={{harga}} disabled>
 
   <p>Jumlah:</p>
-  <input type="text" name="jumlah" required>
+  <input type="number" name="jumlah" required>
 
   <p>Cara Pembayaran:</p>
   <input type="text" name="cara" required>

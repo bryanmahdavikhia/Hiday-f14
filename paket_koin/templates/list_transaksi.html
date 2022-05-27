@@ -15,7 +15,9 @@
 <table style="width:50%">
     <tr>
         <th>No</th>
+        {% if role == 'admin' %}
         <th>Email Pengguna</th>
+        {% endif %}
         <th>Waktu Pembelian</th>
         <th>Jumlah</th>
         <th>Cara Pembayaran</th>
@@ -25,7 +27,9 @@
     {% for i in data %} 
     <tr>
         <td>{{ forloop.counter }}</td>
+        {% if role == 'admin' %}
         <td>{{ i.0 }}</td>
+        {% endif %}
         <td>{{ i.1 }}</td>
         <td>{{ i.2 }}</td>
         <td>{{ i.3 }}</td>

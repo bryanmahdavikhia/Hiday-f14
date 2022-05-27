@@ -6,22 +6,56 @@
 {% endblock meta %}
 
 {% block content %}
+<style>
+  /* The alert message box */
+.alert {
+  padding: 5px;
+  background-color: #f44336; /* Red */
+  color: white;
+  margin-bottom: 20px;
+  
+}
+
+/* The close button */
+.closebtn {
+  margin-left: 15px;
+  color: white;
+  font-weight: bold;
+  float: right;
+  font-size: 22px;
+  line-height: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+/* When moving the mouse over the close button */
+.closebtn:hover {
+  color: black;
+}
+</style>
 <h2>Transaksi Upgrade Lumbung</h2>
   
 <form method="post">
   {% csrf_token %}
-  <p disabled>ID Bibit Tanaman: {{data.0}}</p>
-  <select name="type">
-    <option value = "BT001">BT001</option>
-    <option value = "BT002">BT002</option>
-    <option value = "BT003">BT003</option>
-</select>
+  <p disabled>Level Lumbung: {{data.0.1}} -> {{level}}</p>
+  <input type="hidden" name="level" value={{level}} disabled>
   
-  <p>jumlahg:</p>
-  <input type="number" name="kapasitas" required>
+  <p>Kapasitas Lumbung: {{data.0.2}} -> {{kapasitas}}</p>
+  <input type="hidden" name="kapasitas" value={{kapasitas}} disabled>
 
-  <p>XP:</p>
-  <input type="number" name="harga" value=5 disabled>
-  <button type="submit">Upgrade</button>
+  <p>Biaya: 200</p>
+  <input type="hidden" name="harga" value=200 disabled>
+  <button type="submit">Upgrade</button><br></br>
+  {% if messages %}
+  <ul class="messages">
+    <div class="alert">
+      {% for message in messages %}
+      <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+      {{message}}
+    {% endfor %}
+    </div>
+  </ul>
+{% endif %}
 </form>
+
 {% endblock content %}

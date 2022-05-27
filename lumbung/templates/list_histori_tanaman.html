@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block meta %}
-<title>Histori Tanama</title>
+<title>Histori Tanaman</title>
 {% endblock meta %}
 
 {% block content %}
@@ -15,7 +15,9 @@
 <table style="width:50%">
     <tr>
         <th>No</th>
+        {% if role == 'admin' %}
         <th>Email Pengguna</th>
+        {% endif %}
         <th>Waktu Awal</th>
         <th>Waktu Selesai</th>
         <th>Jumlah</th>
@@ -25,7 +27,9 @@
     {% for i in data %} 
     <tr>
         <td>{{ forloop.counter }}</td>
+        {% if role == 'admin' %}
         <td>{{ i.0 }}</td>
+        {% endif %}
         <td>{{ i.1 }}</td>
         <td>{{ i.2 }}</td>
         <td>{{ i.3 }}</td>

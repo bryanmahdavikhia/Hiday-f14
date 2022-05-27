@@ -2,22 +2,62 @@
 {% load static %}
 
 {% block meta %}
-<title>Transaksi Upgrade Lumbung</title>
+<title>Produksi Tanaman</title>
 {% endblock meta %}
 
 {% block content %}
-<h2>Transaksi Upgrade Lumbung</h2>
+<style>
+  /* The alert message box */
+.alert {
+  padding: 5px;
+  background-color: #f44336; /* Red */
+  color: white;
+  margin-bottom: 20px;
+  
+}
+
+/* The close button */
+.closebtn {
+  margin-left: 15px;
+  color: white;
+  font-weight: bold;
+  float: right;
+  font-size: 22px;
+  line-height: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+/* When moving the mouse over the close button */
+.closebtn:hover {
+  color: black;
+}
+</style>
+<h2>Produksi Tanaman</h2>
   
 <form method="post">
   {% csrf_token %}
-  <p disabled>Level Lumbung:</p>
-  <input type="number" name="level" value={{data.0.1}} disabled>
-  
-  <p>Kapasitas Lumbung:</p>
-  <input type="number" name="kapasitas" value={{data.0.2}} disabled>
+  <p disabled>ID Bibit Tanaman: </p>
+<select name="bibit">
+  {% for i in data %}
+    <option name="bibit" value = {{i.0}}>{{i.0}}</option>
+    {% endfor %}
+</select>
+  <p>jumlah:</p>
+  <input type="number" name="jumlah" required>
 
-  <p>Biaya:</p>
-  <input type="number" name="harga" value=200 disabled>
-  <button type="submit">Upgrade</button>
+  <p>XP:</p>
+  <input type="number" name="xp" value=5 disabled>
+  <button type="submit">Produksi</button>
+  {% if messages %}
+  <ul class="messages">
+    <div class="alert">
+      {% for message in messages %}
+      <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+      {{message}}
+    {% endfor %}
+    </div>
+  </ul>
+{% endif %}
 </form>
 {% endblock content %}
