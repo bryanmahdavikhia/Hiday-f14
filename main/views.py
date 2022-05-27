@@ -107,7 +107,7 @@ def register(request, id):
                 return HttpResponseRedirect("/main")
             else:
                 messages.add_message(request, messages.INFO, 'Email sudah terambil. silahkan gunakan email lain')
-                return redirect("home:register")
+                return HttpResponseRedirect("/register/%s" % id)
         else:
             if id == "admin":
                 user = None
